@@ -18,7 +18,6 @@ public class DragDialog : MonoBehaviour {
 
             if(hit.collider != col) return;
             transform.position = mousePos2D;
-            
         }
     }
 }
