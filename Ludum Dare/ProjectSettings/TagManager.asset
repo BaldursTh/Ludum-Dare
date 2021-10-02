@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - 'Player '
+  - Ground
+  - Enemy
+  - HealthPickup
+  - Player
   - Player Projectile
   - Enemy Projectile
   layers:
