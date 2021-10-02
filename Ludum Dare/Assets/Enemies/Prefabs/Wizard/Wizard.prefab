@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 4
+  deathUnstability: 0
   wallCheck: {fileID: 4432706323690492751}
   floorCheck: {fileID: 4432706322662056374}
   moveSpeed: 2.5

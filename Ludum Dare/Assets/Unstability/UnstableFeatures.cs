@@ -8,8 +8,8 @@ using static UnityEngine.Random;
 using Player;
 public class UnstableFeatures : MonoBehaviour
 {
-    public Dictionary<string, Action<int, int, float, float, string, string, GameObject>> features;
-
+    //public Dictionary<string, Action<int, int, float, float, string, string, GameObject>> features;
+    public List< Action<int, int, float, float, string, string, GameObject>> features;
     public Camera cam;
     public GameObject error;
     public GameObject player;
@@ -20,7 +20,7 @@ public class UnstableFeatures : MonoBehaviour
     
     private void Start()
     {
-        features = new Dictionary<string, Action<int, int, float, float, string, string, GameObject>>();
+        /* features = new Dictionary<string, Action<int, int, float, float, string, string, GameObject>>();
         features.Add("GravitySwap", GravitySwap);
         features.Add("InvertedControls", InvertedControls);
         features.Add("SwapWaterLava", SwapWaterLava);
@@ -38,9 +38,27 @@ public class UnstableFeatures : MonoBehaviour
         features.Add("PlayerScale", PlayerScale);
         features.Add("RandomizeBrightness", RandomizeBrightness);
         features.Add("Cracks", Cracks);
-        features.Add("ScreenRotate", ScreenRotate);
-
-        player = GameObject.FindGameObjectWithTag("Player");
+        features.Add("ScreenRotate", ScreenRotate);*/
+        features = new List<Action<int, int, float, float, string, string, GameObject>>();
+        features.Add( GravitySwap);
+        features.Add(InvertedControls);
+        features.Add(SwapWaterLava);
+        features.Add(SpawnExtraEnemies);
+        features.Add(ObjectTeleportation);
+        features.Add(GunShootBackwards);
+        features.Add(ScreenFlip);
+        features.Add(BlackVoids);
+        features.Add(GlitchEffect);
+        features.Add(InaccurateParticles);
+        features.Add(FakeError);
+        features.Add(HomingBullets);
+        features.Add(ScaleEnemies);
+        features.Add(EnemyRandomize);
+        features.Add(PlayerScale);
+        features.Add(RandomizeBrightness);
+        features.Add(Cracks);
+        features.Add(ScreenRotate); 
+         player = GameObject.FindGameObjectWithTag("Player");
         playerMov = player.GetComponent<PlayerMovement>();
         cam = Camera.main;
     }
@@ -54,7 +72,10 @@ public class UnstableFeatures : MonoBehaviour
     }
     public void DoRandomFeature()
     {
-        
+        int random = Range(0, features.Count);
+        features[random](1, 0, 0, 0, "", "", gameObject);
+
+
     }
     
 
@@ -149,7 +170,15 @@ public class UnstableFeatures : MonoBehaviour
 
     public void ScaleEnemies(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
     {
+        GameObject[] rbs = GameObject.FindGameObjectsWithTag("Enemy");
 
+        foreach (GameObject rb in rbs)
+        {
+            float[] multis = { 0.5f, 2 };
+            int multi = Range(0, multis.Length);
+            rb.transform.localScale *= multis[multi];
+
+        }
     }
 
     public void EnemyRandomize(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)

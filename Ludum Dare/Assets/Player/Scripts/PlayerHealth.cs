@@ -72,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= 1;
         CheckHealth();
-       // unstableFeatures.FakeError(2, 0, 0, 0, "", "", gameObject);
+       // unstableFeatures.FakeError(1, 0, 0, 0, "", "", gameObject);
        
     }
     IEnumerator Invincibility()
