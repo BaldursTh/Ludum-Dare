@@ -9,15 +9,22 @@ namespace Enemies
     {
         public float speed;
         private Rigidbody2D rb;
+        public bool useGravity = false;
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+            if (useGravity)
+            {
+                rb.gravityScale = 1;
+                rb.AddForce(transform.right * speed);
+            }
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            rb.velocity = transform.right * speed * Time.deltaTime;
+            if(!useGravity)
+                rb.velocity = transform.right * speed * Time.deltaTime;
         }
         private void OnBecameInvisible()
         {
