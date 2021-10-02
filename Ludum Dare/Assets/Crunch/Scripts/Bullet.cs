@@ -17,6 +17,7 @@ namespace Enemies
             {
                 rb.gravityScale = 1;
                 rb.AddForce(transform.right * speed);
+                rb.constraints = RigidbodyConstraints2D.None;
             }
         }
 
