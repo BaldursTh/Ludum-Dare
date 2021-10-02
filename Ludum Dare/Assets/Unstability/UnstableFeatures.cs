@@ -73,7 +73,7 @@ public class UnstableFeatures : MonoBehaviour
     public void DoRandomFeature()
     {
         int random = Range(0, features.Count);
-        features[random](1, 0, 0, 0, "", "", gameObject);
+        features[random](2, 0, 0, 0, "", "", gameObject);
 
 
     }
