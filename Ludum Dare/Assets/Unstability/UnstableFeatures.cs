@@ -74,6 +74,7 @@ public class UnstableFeatures : MonoBehaviour
     {
         int random = Range(0, features.Count);
         features[random](2, 0, 0, 0, "", "", gameObject);
+        print("yes");
 
 
     }
@@ -128,7 +129,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void BlackVoids(int count, int _a, float _c, float _d, string _e, string _f, GameObject go)
     {
-
+        //dont nothing
     }
 
     public void GlitchEffect(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
