@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9490418e2fa29e42ac58c6cc3efb2cc, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  moveSpeedCap: 4
+  moveSpeedCap: 8
   moveSpeedAccelerationRate: 10000
-  jumpVelocity: 750
+  jumpVelocity: 800
   dashSpeed: 50
-  dashCooldown: 0
+  dashCooldown: 0.2
   dashTime: 0.1
   shootCooldown: 0.5
   bulletSpeed: 1000
   maxHealth: 3
   healthGain: 25
+  invincibilityDuration: 1
+  shootUnstability: 1

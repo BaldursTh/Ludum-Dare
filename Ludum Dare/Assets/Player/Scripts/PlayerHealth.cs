@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
 
     public float maxHealth => data.maxHealth;
     public float healthGain => data.healthGain;
+    public float invincibilityDuration => data.invincibilityDuration;
 
 
     public UnstableFeatures unstableFeatures;
@@ -33,9 +34,10 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Enemy"))
+        if (collision.collider.gameObject.layer == 7)
         {
             LooseHealth();
+           StartCoroutine(Invincibility());
         }
        
     }
@@ -57,6 +59,11 @@ public class PlayerHealth : MonoBehaviour
                 
             }
         }
+        if (collision.gameObject.layer == 7)
+        {
+            LooseHealth();
+            StartCoroutine(Invincibility());
+        }
     }
     public GameObject heart1;
     public GameObject heart2;
@@ -65,37 +72,45 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= 1;
         CheckHealth();
-        unstableFeatures.FakeError(2, 0, 0, 0, "", "", gameObject);
+       // unstableFeatures.FakeError(2, 0, 0, 0, "", "", gameObject);
        
+    }
+    IEnumerator Invincibility()
+    {
+        
+        Physics2D.IgnoreLayerCollision(0, 7, true);
+        yield return new WaitForSeconds(invincibilityDuration);
+        Physics2D.IgnoreLayerCollision(0, 7, false);
+        
     }
     void CheckHealth()
     {
-        // if (currentHealth == 3)
-        // {
-        //     heart3.GetComponent<Image>().enabled = true;
-        //     heart2.GetComponent<Image>().enabled = true;
-        //     heart1.GetComponent<Image>().enabled = true;
-        // }
-        // if (currentHealth == 2)
-        // {
-        //     heart3.GetComponent<Image>().enabled = true;
-        //     heart2.GetComponent<Image>().enabled = true;
-        //     heart1.GetComponent<Image>().enabled = false;
-        // }
-        // if (currentHealth == 1)
-        // {
-        //     heart3.GetComponent<Image>().enabled = true;
-        //     heart2.GetComponent<Image>().enabled = false;
-        //     heart1.GetComponent<Image>().enabled = false;
+        if (currentHealth == 3)
+         {
+             heart3.GetComponent<Image>().enabled = true;
+             heart2.GetComponent<Image>().enabled = true;
+             heart1.GetComponent<Image>().enabled = true;
+         }
+         if (currentHealth == 2)
+         {
+             heart3.GetComponent<Image>().enabled = true;
+             heart2.GetComponent<Image>().enabled = true;
+             heart1.GetComponent<Image>().enabled = false;
+         }
+         if (currentHealth == 1)
+         {
+             heart3.GetComponent<Image>().enabled = true;
+             heart2.GetComponent<Image>().enabled = false;
+             heart1.GetComponent<Image>().enabled = false;
 
-        // }
+         }
 
-        // if (currentHealth <= 0)
-        // {
-        //     heart2.GetComponent<Image>().enabled = false;
-        //     heart1.GetComponent<Image>().enabled = false;
-        //     heart3.GetComponent<Image>().enabled = false;
-        //     print("u lost");
-        // }
+         if (currentHealth <= 0)
+         {
+             heart2.GetComponent<Image>().enabled = false;
+             heart1.GetComponent<Image>().enabled = false;
+             heart3.GetComponent<Image>().enabled = false;
+             print("u lost");
+         }
     }
 }

@@ -15,4 +15,7 @@ public class PlayerData : ScriptableObject
     public float bulletSpeed;
     public float maxHealth;
     public float healthGain;
+    public float invincibilityDuration;
+    public float shootUnstability;
+    
 }

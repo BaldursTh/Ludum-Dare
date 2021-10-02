@@ -12,7 +12,8 @@ namespace Player
         public Collider2D theCollider;
         public int facingDirection = 1;
         public GameObject bulletPrefab;
-
+        public int invertedControls = 1;
+        public int invertedGun = 1;
 
         #region Parameters
         public float moveSpeedCap => data.moveSpeedCap;
@@ -24,11 +25,13 @@ namespace Player
         public float dashTime => data.dashTime;
         public float shootCooldown => data.shootCooldown;
         public float bulletSpeed => data.bulletSpeed;
+        public float shootUnstability => data.shootUnstability;
 
         #endregion
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            facingDirection = 1;
         }
         public enum PlayerState
         {
@@ -50,6 +53,7 @@ namespace Player
         void Update()
         {
             HandleInput();
+            
 
         }
         public Vector2 point;
@@ -74,8 +78,11 @@ namespace Player
         bool canShoot = true;
         void Shoot()
         {
+            
             GameObject _bulletPrefab = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-            _bulletPrefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(bulletSpeed * facingDirection, 0));
+            _bulletPrefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(bulletSpeed * facingDirection * invertedGun, 0));
+            Destroy(_bulletPrefab, 10);
+            UnstabilityManager.instance.AddUnstability(shootUnstability);
             StartCoroutine(ShootCooldown());
         }
         IEnumerator ShootCooldown()
@@ -90,41 +97,60 @@ namespace Player
         void HandleInput()
         {
             if (state == PlayerState.Dashing) return;
+            
+                CheckGround();
 
-            CheckGround();
 
-            Move(Input.GetAxis("Horizontal"));
 
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                if (canDash)
+
+               
+
+                if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    StartCoroutine(Dash());
+                    Move(1);
                 }
-            }
-            else if (Input.GetKeyDown(KeyCode.Z) && canShoot == true)
-            {
-                Shoot();
-            }
-            else
-            {
-                rb.velocity = new Vector2(0, rb.velocity.y);
-            }
+                else if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    Move(-1);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                }
+                if (Input.GetKeyDown(KeyCode.X))
+                {
+                    if (canDash)
+                    {
+                        StartCoroutine(Dash());
+                    }
+                }
 
-            if (state == PlayerState.Walking && Input.GetKeyDown(KeyCode.C))
-            {
-                Jump();
-            }
+                else if (Input.GetKeyDown(KeyCode.Z) && canShoot == true)
+                {
+                    Shoot();
+                }
+
+                if (state == PlayerState.Walking && Input.GetKeyDown(KeyCode.C))
+                {
+                    Jump();
+                }
+            
+
+            
 
         }
         public bool canDash = true;
         IEnumerator Dash()
         {
-            print("yes");
+            
+            
             PlayerState currentState = state;
             state = PlayerState.Dashing;
+           
             rb.velocity = new Vector2(dashSpeed * facingDirection, 0);
+            
             yield return new WaitForSeconds(dashTime);
+            
             StartCoroutine(DashCooldown());
             state = currentState;
 
@@ -140,19 +166,20 @@ namespace Player
 
         void Move(float direction)
         {
-            facingDirection = Mathf.RoundToInt(direction);
-            rb.AddForce(new Vector2(moveSpeedAccelerationRate * direction * Time.deltaTime, 0));
+            facingDirection = Mathf.RoundToInt(direction) * invertedControls;
+            rb.AddForce(new Vector2(moveSpeedAccelerationRate * direction * Time.deltaTime * invertedControls, 0));
             if (rb.velocity.magnitude > moveSpeedCap)
             {
 
                 rb.velocity = new Vector2(moveSpeedCap * direction, rb.velocity.y);
             }
+            transform.localScale = new Vector2(-facingDirection, transform.localScale.y);
 
         }
         void Jump()
         {
-            rb.velocity = Vector2.zero;
-            rb.AddForce(new Vector2(0, jumpVelocity));
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(new Vector2(0, jumpVelocity * (rb.gravityScale/Mathf.Abs(rb.gravityScale) )));
             state = PlayerState.Jumping;
         }
 
