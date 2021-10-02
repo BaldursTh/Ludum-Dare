@@ -5,18 +5,20 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Player Projectile
   - Enemy
   - HealthPickup
+  - Player
+  - Player Projectile
+  - Enemy Projectile
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - World Layer
+  - Enemy
   - 
   - 
   - 
