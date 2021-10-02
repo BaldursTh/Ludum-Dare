@@ -36,7 +36,7 @@ namespace Player
             Jumping,
             Dashing,
 
-            
+
         }
         public PlayerState state;
         void Start()
@@ -50,7 +50,7 @@ namespace Player
         void Update()
         {
             HandleInput();
-            
+
         }
         public Vector2 point;
         public float radius;
@@ -61,7 +61,7 @@ namespace Player
         void CheckGround()
         {
             Collider2D colliders = Physics2D.OverlapCircle(point + new Vector2(transform.position.x, transform.position.y), radius);
-            
+
             if (colliders != null)
             {
                 if (colliders.CompareTag("Ground"))
@@ -69,7 +69,7 @@ namespace Player
                     state = PlayerState.Walking;
                 }
             }
-           
+
         }
         bool canShoot = true;
         void Shoot()
@@ -80,56 +80,44 @@ namespace Player
         }
         IEnumerator ShootCooldown()
         {
-           
+
             canShoot = false;
             yield return new WaitForSeconds(shootCooldown);
             canShoot = true;
-            
+
         }
 
         void HandleInput()
         {
-            if (state != PlayerState.Dashing)
+            if (state == PlayerState.Dashing) return;
+
+            CheckGround();
+
+            Move(Input.GetAxis("Horizontal"));
+
+            if (Input.GetKeyDown(KeyCode.X))
             {
-                CheckGround();
-                
-                if (Input.GetKeyDown(KeyCode.X))
+                if (canDash)
                 {
-                    if (canDash)
-                    {
-                        StartCoroutine(Dash());
-                    }
-                }
-                else if (Input.GetKeyDown(KeyCode.Z) && canShoot == true)
-                {
-                    Shoot();
-                }
-                else if (Input.GetKey(KeyCode.LeftArrow))
-                {
-                    Move(-1);
-                }
-                else if (Input.GetKey(KeyCode.RightArrow))
-                {
-                    Move(1);
-                }
-
-                else
-                {
-                    rb.velocity = new Vector2(0, rb.velocity.y);
-                }
-                if (state == PlayerState.Walking)
-                {
-
-                    if (Input.GetKeyDown(KeyCode.C))
-                    {
-                        Jump();
-                    }
-
+                    StartCoroutine(Dash());
                 }
             }
-           
+            else if (Input.GetKeyDown(KeyCode.Z) && canShoot == true)
+            {
+                Shoot();
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
+
+            if (state == PlayerState.Walking && Input.GetKeyDown(KeyCode.C))
+            {
+                Jump();
+            }
+
         }
-        public bool canDash = true; 
+        public bool canDash = true;
         IEnumerator Dash()
         {
             print("yes");
@@ -141,25 +129,25 @@ namespace Player
             state = currentState;
 
 
-        }        
+        }
         IEnumerator DashCooldown()
         {
-            
+
             canDash = false;
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
         }
 
-        void Move(int direction)
+        void Move(float direction)
         {
-            facingDirection = direction;
+            facingDirection = Mathf.RoundToInt(direction);
             rb.AddForce(new Vector2(moveSpeedAccelerationRate * direction * Time.deltaTime, 0));
             if (rb.velocity.magnitude > moveSpeedCap)
             {
-                
+
                 rb.velocity = new Vector2(moveSpeedCap * direction, rb.velocity.y);
             }
-            
+
         }
         void Jump()
         {
@@ -169,7 +157,7 @@ namespace Player
         }
 
 
-       
+
 
 
 
