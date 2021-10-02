@@ -36,7 +36,6 @@ public class PlayerHealth : MonoBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
             LooseHealth();
-            unstableFeatures.ScreenRotate(1, 0, 0, 0, "", "null", gameObject);
         }
        
     }
@@ -66,36 +65,37 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= 1;
         CheckHealth();
+        unstableFeatures.FakeError(2, 0, 0, 0, "", "", gameObject);
        
     }
     void CheckHealth()
     {
-        if (currentHealth == 3)
-        {
-            heart3.GetComponent<Image>().enabled = true;
-            heart2.GetComponent<Image>().enabled = true;
-            heart1.GetComponent<Image>().enabled = true;
-        }
-        if (currentHealth == 2)
-        {
-            heart3.GetComponent<Image>().enabled = true;
-            heart2.GetComponent<Image>().enabled = true;
-            heart1.GetComponent<Image>().enabled = false;
-        }
-        if (currentHealth == 1)
-        {
-            heart3.GetComponent<Image>().enabled = true;
-            heart2.GetComponent<Image>().enabled = false;
-            heart1.GetComponent<Image>().enabled = false;
+        // if (currentHealth == 3)
+        // {
+        //     heart3.GetComponent<Image>().enabled = true;
+        //     heart2.GetComponent<Image>().enabled = true;
+        //     heart1.GetComponent<Image>().enabled = true;
+        // }
+        // if (currentHealth == 2)
+        // {
+        //     heart3.GetComponent<Image>().enabled = true;
+        //     heart2.GetComponent<Image>().enabled = true;
+        //     heart1.GetComponent<Image>().enabled = false;
+        // }
+        // if (currentHealth == 1)
+        // {
+        //     heart3.GetComponent<Image>().enabled = true;
+        //     heart2.GetComponent<Image>().enabled = false;
+        //     heart1.GetComponent<Image>().enabled = false;
 
-        }
+        // }
 
-        if (currentHealth <= 0)
-        {
-            heart2.GetComponent<Image>().enabled = false;
-            heart1.GetComponent<Image>().enabled = false;
-            heart3.GetComponent<Image>().enabled = false;
-            print("u lost");
-        }
+        // if (currentHealth <= 0)
+        // {
+        //     heart2.GetComponent<Image>().enabled = false;
+        //     heart1.GetComponent<Image>().enabled = false;
+        //     heart3.GetComponent<Image>().enabled = false;
+        //     print("u lost");
+        // }
     }
 }
