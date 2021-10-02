@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   moveSpeedCap: 4
-  moveSpeedAccelerationRate: 10000
+  moveSpeedAccelerationRate: 3000
+  moveSmooth: 0.05
   jumpVelocity: 750
   dashSpeed: 50
   dashCooldown: 0

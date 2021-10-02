@@ -13,6 +13,7 @@ namespace Player
         public int facingDirection = 1;
         public GameObject bulletPrefab;
 
+        private Vector3 velocity = Vector3.zero;
 
         #region Parameters
         public float moveSpeedCap => data.moveSpeedCap;
@@ -24,6 +25,8 @@ namespace Player
         public float dashTime => data.dashTime;
         public float shootCooldown => data.shootCooldown;
         public float bulletSpeed => data.bulletSpeed;
+
+        public float moveSmooth => data.moveSmooth;
 
         #endregion
         private void Awake()
@@ -115,7 +118,8 @@ namespace Player
 
                 else
                 {
-                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    Move(0);
+                    //rb.velocity = new Vector2(0, rb.velocity.y);
                 }
                 if (state == PlayerState.Walking)
                 {
@@ -153,17 +157,21 @@ namespace Player
         void Move(int direction)
         {
             facingDirection = direction;
-            rb.AddForce(new Vector2(moveSpeedAccelerationRate * direction * Time.deltaTime, 0));
+
+            Vector3 targetVelocity = new Vector2(moveSpeedCap * direction, rb.velocity.y);
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, moveSmooth);
+
+            /*rb.AddForce(new Vector2(moveSpeedAccelerationRate * direction * Time.deltaTime, 0));
             if (rb.velocity.magnitude > moveSpeedCap)
             {
-                
-                rb.velocity = new Vector2(moveSpeedCap * direction, rb.velocity.y);
-            }
+                //Vector3 targetVelocity = new Vector2(moveSpeedCap * direction, rb.velocity.y);
+                rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, moveSmooth);
+            }*/
             
         }
         void Jump()
         {
-            rb.velocity = Vector2.zero;
+            //rb.velocity = Vector2.zero;
             rb.AddForce(new Vector2(0, jumpVelocity));
             state = PlayerState.Jumping;
         }
