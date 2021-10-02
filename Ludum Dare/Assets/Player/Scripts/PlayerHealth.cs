@@ -16,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth => data.maxHealth;
     public float healthGain => data.healthGain;
 
+
+    public UnstableFeatures unstableFeatures;
     void Start()
     {
         currentHealth = maxHealth;
@@ -34,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
             LooseHealth();
+            unstableFeatures.ScreenRotate(1, 0, 0, 0, "", "null", gameObject);
         }
        
     }
