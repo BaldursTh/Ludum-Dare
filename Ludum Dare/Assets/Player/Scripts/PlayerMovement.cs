@@ -28,6 +28,7 @@ namespace Player
         public float shootCooldown => data.shootCooldown;
         public float bulletSpeed => data.bulletSpeed;
         public float shootUnstability => data.shootUnstability;
+        public float moveSmooth => data.moveSmooth;
 
         #endregion
         private void Awake()
@@ -94,19 +95,11 @@ namespace Player
             if (state == PlayerState.Dashing) return;
 
             CheckGround();
-
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                Move(1);
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                Move(-1);
-            }
-            else
-            {
-                rb.velocity = new Vector2(0, rb.velocity.y);
-            }
+            Move(Input.GetAxisRaw("Horizontal"));
+            //else
+            //{
+            //    rb.velocity = new Vector2(0, rb.velocity.y);
+            //}
             if (Input.GetKeyDown(KeyCode.X))
             {
                 if (canDash)
@@ -126,6 +119,7 @@ namespace Player
             }
         }
         public bool canDash = true;
+
         IEnumerator Dash()
         {
             
@@ -150,15 +144,22 @@ namespace Player
             canDash = true;
         }
 
+        private Vector3 velocity = Vector3.zero;
         void Move(float direction)
         {
-            facingDirection = Mathf.RoundToInt(direction) * invertedControls;
-            rb.AddForce(new Vector2(moveSpeedAccelerationRate * direction * Time.deltaTime * invertedControls, 0));
-            if (rb.velocity.magnitude > moveSpeedCap)
+            int dir = Mathf.RoundToInt(direction);
+            if (dir != 0)
+            {
+                facingDirection = dir * invertedControls;
+            }
+            Vector3 targetVelocity = new Vector2(moveSpeedCap * direction * invertedControls, rb.velocity.y);
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, moveSmooth);
+            //rb.AddForce(new Vector2(moveSpeedAccelerationRate * direction * Time.deltaTime * invertedControls, 0));
+            /*if (rb.velocity.magnitude > moveSpeedCap)
             {
 
                 rb.velocity = new Vector2(moveSpeedCap * direction * invertedControls, rb.velocity.y);
-            }
+            }*/
             transform.localScale = new Vector2(-facingDirection, transform.localScale.y);
 
         }

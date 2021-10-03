@@ -4204,6 +4204,10 @@ PrefabInstance:
       propertyPath: whiteSlider
       value: 
       objectReference: {fileID: 1492142911}
+    - target: {fileID: 4671713532468955344, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
+      propertyPath: unstableFeatures
+      value: 
+      objectReference: {fileID: 1235732697}
     - target: {fileID: 4671713532468955345, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4267,10 +4271,6 @@ PrefabInstance:
     - target: {fileID: 4671713532468955357, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
       propertyPath: ground.m_Bits
       value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671713532468955359, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4671713532468955359, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
       propertyPath: m_EdgeRadius

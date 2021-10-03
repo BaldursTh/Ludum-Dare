@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9490418e2fa29e42ac58c6cc3efb2cc, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  moveSpeedCap: 8
+  moveSpeedCap: 12
   moveSpeedAccelerationRate: 10000
+  moveSmooth: 0.05
   jumpVelocity: 800
   dashSpeed: 50
   dashCooldown: 0.2
