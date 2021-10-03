@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Respawn : MonoBehaviour
+namespace Level
 {
-    private Transform player;
-    // Start is called before the first frame update
-    void Start()
+    public class Respawn : MonoBehaviour
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(player.position.y <= transform.position.y)
+        private Transform player;
+        // Start is called before the first frame update
+        void Start()
         {
-            SceneManager.LoadScene(1);
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (player.position.y <= transform.position.y)
+            {
+                SceneManager.LoadScene(1);
+            }
         }
     }
 }
