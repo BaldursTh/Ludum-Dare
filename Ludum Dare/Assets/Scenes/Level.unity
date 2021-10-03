@@ -4260,18 +4260,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4671713532468955357, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
-      propertyPath: point.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671713532468955357, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
-      propertyPath: point.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671713532468955357, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
-      propertyPath: ground.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 4671713532468955359, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
       propertyPath: m_EdgeRadius
       value: 0
