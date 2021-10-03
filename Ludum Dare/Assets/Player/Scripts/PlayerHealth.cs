@@ -86,7 +86,18 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
-
+    public void Respawn()
+    {
+        currentHealth = maxHealth;
+        CheckHealth();
+        GetComponent<Player.PlayerMovement>().enabled = true;
+        GetComponent<Rigidbody2D>().isKinematic = false;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Collider2D>().enabled = true;
+        anim.Rebind();
+        anim.Play("PlayerIdle", -1, 0f);
+        gameOverScreen.SetActive(false);
+    }
 
 
     public GameObject heart1;

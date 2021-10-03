@@ -12,9 +12,10 @@ public class GameManager : MonoBehaviour
     public GameObject pause;
     public static GameManager instance;
 
+    public static Vector3 checkpoint = new Vector3();
+    public Vector3 start;
 
-
-    private void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -35,20 +36,57 @@ public class GameManager : MonoBehaviour
             if (state == GameState.Play)
             {
                 state = GameState.Pause;
-                pause.SetActive(true);
-                Time.timeScale = 0;
             }
             else if (state == GameState.Pause)
             {
                 state = GameState.Play;
-                pause.SetActive(false);
-                Time.timeScale = 1;
             }
-               
+            CheckState();
         }
         
     }
+
+    public void UpdateState(int state)
+    {
+        switch (state)
+        {
+            case 0:
+                this.state = GameState.Play;
+                break;
+            case 1:
+                this.state = GameState.Pause;
+                break;
+            case 2:
+                this.state = GameState.Dead;
+                break;
+            default:
+                this.state = GameState.Play;
+                break;
+        }
+        CheckState();
+    }
     
+    private void CheckState()
+    {
+        switch (state)
+        {
+            case GameState.Play:
+                pause.SetActive(false);
+                Time.timeScale = 1;
+                break;
+            case GameState.Pause:
+                pause.SetActive(true);
+                Time.timeScale = 0;
+                break;
+        }
+    }
 
-
+    public void Respawn()
+    {
+        state = GameState.Play;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.transform.position = checkpoint;
+        player.GetComponent<PlayerHealth>().Respawn();
+        
+    }
 }

@@ -38,6 +38,11 @@ namespace Player
             rb = GetComponent<Rigidbody2D>();
             facingDirection = 1;
             jumps = 2;
+            if (GameManager.instance != null)
+            {
+                transform.position = GameManager.checkpoint;
+                Debug.Log("Yes;");
+            }
         }
         public enum PlayerState
         {
