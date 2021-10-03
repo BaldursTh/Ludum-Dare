@@ -155,10 +155,10 @@ MonoBehaviour:
   invertedGun: 1
   ground:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   state: 0
-  point: {x: 0, y: -0.7}
-  radius: 0.125
+  point: {x: 0, y: -1}
+  boxDimensions: {x: 0, y: 0}
   canDash: 0
 --- !u!114 &4671713532468955344
 MonoBehaviour:
