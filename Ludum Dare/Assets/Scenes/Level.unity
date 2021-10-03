@@ -446,6 +446,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1137666532}
+  - {fileID: 718752400}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1716,12 +1717,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718752399}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 2.36, z: -10.5}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 73849325}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1818360608 &718752401
 PositionConstraint:
@@ -1730,7 +1731,7 @@ PositionConstraint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718752399}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Weight: 1
   m_TranslationAtRest: {x: 0.07, y: 2.36, z: -10.5}
   m_TranslationOffset: {x: 0, y: 0, z: 0}
@@ -2753,7 +2754,6 @@ MonoBehaviour:
   currentUnstability: 0
   stabilityTimer: 0
   featureInterval: 60
-  features: {fileID: 0}
   previousFeatureTime: 0
   slider: {fileID: 1276989527}
   hourglass: {fileID: 140004314}
@@ -4252,8 +4252,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077966316}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 53.25, y: 48.3, z: 0}
-  m_LocalScale: {x: 138.7548, y: 5.25, z: 1}
+  m_LocalPosition: {x: 83.6226, y: 48.3, z: 0}
+  m_LocalScale: {x: 199.50166, y: 5.25, z: 1}
   m_Children: []
   m_Father: {fileID: 259155203}
   m_RootOrder: 6

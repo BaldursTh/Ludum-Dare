@@ -60,7 +60,6 @@ public class UnstableFeatures : MonoBehaviour
         features.Add(ScreenFlip);
         features.Add(BlackVoids);
         features.Add(GlitchEffect);
-        features.Add(InaccurateParticles);
         features.Add(FakeError);
         features.Add(HomingBullets);
         features.Add(ScaleEnemies);
@@ -108,9 +107,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void GravitySwap(int x, int y, float _c, float _d, string _e, string _f, GameObject go)
     {
-        GameObject[] rbs = GameObject.FindGameObjectsWithTag("Enemy");
-         
-        foreach(GameObject rb in rbs)
+        foreach(Transform rb in enemyHandler.transform)
         {
             rb.GetComponent<Rigidbody2D>().gravityScale *= -1;
             rb.transform.localScale = new Vector2(rb.transform.localScale.x, rb.transform.localScale.y * -1);
@@ -170,11 +167,6 @@ public class UnstableFeatures : MonoBehaviour
     public void GlitchEffect(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
         gli.intensity = Mathf.Clamp(gli.intensity + 0.05f, 0, 1);
-    }
-
-    public void InaccurateParticles(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
-    {
-
     }
 
     public void FakeError(int count, int _b, float _c, float _d, string _e, string message, GameObject go)
