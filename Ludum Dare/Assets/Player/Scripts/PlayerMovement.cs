@@ -53,11 +53,10 @@ namespace Player
         }
 
 
-        void Update()
+        void FixedUpdate()
         {
             HandleInput();
             
-
         }
         public Vector2 point;
         public Vector2 boxDimensions;
@@ -68,18 +67,18 @@ namespace Player
         }
         void CheckGround()
         {
-            if (Physics2D.OverlapBox(point + new Vector2(transform.position.x, transform.position.y), new Vector2(0.9f, 0.2f), ground))
+            if (Physics2D.OverlapBox(point + new Vector2(transform.position.x, transform.position.y), new Vector2(0.9f, 0.2f), 0, ground))
                 state = PlayerState.Walking;
         }
         bool canShoot = true;
         void Shoot()
         {
-            
             GameObject _bulletPrefab = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             _bulletPrefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(bulletSpeed * facingDirection * invertedGun, 0));
             Destroy(_bulletPrefab, 10);
             UnstabilityManager.instance.AddUnstability(shootUnstability);
             StartCoroutine(ShootCooldown());
+            UnstabilityManager.instance.features.GlitchEffect(0,0,0,0,"","",null);
         }
         IEnumerator ShootCooldown()
         {
@@ -160,7 +159,7 @@ namespace Player
 
                 rb.velocity = new Vector2(moveSpeedCap * direction * invertedControls, rb.velocity.y);
             }*/
-            transform.localScale = new Vector2(-facingDirection, transform.localScale.y);
+            transform.localScale = new Vector2(-facingDirection * Mathf.Abs(transform.localScale.x), transform.localScale.y);
 
         }
         void Jump()

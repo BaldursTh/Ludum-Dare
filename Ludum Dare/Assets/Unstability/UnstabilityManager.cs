@@ -11,8 +11,8 @@ public class UnstabilityManager : MonoBehaviour
 
     public float stabilityTimer;
     public float featureInterval;
-    
-    UnstableFeatures features;
+#warning change this to private later
+    public UnstableFeatures features;
     public float previousFeatureTime;
     public Slider slider;
     public GameObject hourglass;

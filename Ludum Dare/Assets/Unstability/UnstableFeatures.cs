@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Collections.Specialized;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using static UnityEngine.Random;
 using Player;
 public class UnstableFeatures : MonoBehaviour
@@ -14,10 +14,19 @@ public class UnstableFeatures : MonoBehaviour
     public GameObject error;
     public GameObject player;
     public PlayerMovement playerMov;
-    
 
-    
-    
+    public Transform vcam;
+
+    [Header("Enemies")]
+    public GameObject enemyHandler;
+    public List<Vector3> spawnLocs;
+    public List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> bigEnemies = new List<GameObject>();
+
+    [Header("Overlays")]
+    public Image brightness;
+    public Kino.DigitalGlitch gli;
+
     private void Start()
     {
         /* features = new Dictionary<string, Action<int, int, float, float, string, string, GameObject>>();
@@ -61,6 +70,18 @@ public class UnstableFeatures : MonoBehaviour
          player = GameObject.FindGameObjectWithTag("Player");
         playerMov = player.GetComponent<PlayerMovement>();
         cam = Camera.main;
+        vcam = GameObject.FindGameObjectWithTag("vcam").transform;
+        enemyHandler = GameObject.FindGameObjectWithTag("Enemy Container");
+
+        spawnLocs = new List<Vector3>();
+
+        foreach(GameObject i in GameObject.FindGameObjectsWithTag("Enemy Spawn"))
+        {
+            spawnLocs.Add(i.transform.position);
+        }
+
+        brightness = GameObject.FindGameObjectWithTag("Brightness Overlays").GetComponent<Image>();
+        gli = cam.GetComponent<Kino.DigitalGlitch>();
     }
     private void Update()
     {
@@ -107,9 +128,20 @@ public class UnstableFeatures : MonoBehaviour
 
     }
 
-    public void SpawnExtraEnemies(int count, int size, float _c, float _d, string _e, string _f, GameObject go)
+    public void SpawnExtraEnemies(int count, int _b, float bigThreshold, float _d, string _e, string _f, GameObject go)
     {
-
+        for (int i = 0; i < count; i++)
+        {
+            GameObject toSpawn;
+            if (Range(0f, 1f) >= bigThreshold)
+                toSpawn = bigEnemies[Range(0, bigEnemies.Count)];
+            else
+                toSpawn = enemies[Range(0, enemies.Count)];
+            Instantiate(toSpawn,
+               spawnLocs[Range(0, spawnLocs.Count)],
+               Quaternion.identity,
+               enemyHandler.transform);
+        }
     }
 
     public void ObjectTeleportation(int maxSwaps, int _a, float _c, float _d, string item1, string item2, GameObject go)
@@ -124,7 +156,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void ScreenFlip(int x, int y, float _c, float _d, string _e, string _f, GameObject go)
     {
-        cam.transform.Rotate(0, 0, 180);
+        cam.projectionMatrix *= Matrix4x4.Scale(new Vector3(1, -1, 1));
     }
 
     public void BlackVoids(int count, int _a, float _c, float _d, string _e, string _f, GameObject go)
@@ -134,7 +166,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void GlitchEffect(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
-
+        gli.intensity = Mathf.Clamp(gli.intensity + 0.05f, 0, 1);
     }
 
     public void InaccurateParticles(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
@@ -157,46 +189,58 @@ public class UnstableFeatures : MonoBehaviour
 
     public void HomingBullets(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
-        GameObject[] rbs = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject rb in rbs)
+        foreach (Transform i in enemyHandler.transform)
         {
-            if (rb.GetComponent<Enemies.ShootEnemy>() != null)
+            if (i.GetComponent<Enemies.ShootEnemy>() != null)
             {
-                rb.GetComponent<Enemies.ShootEnemy>().home = true;
+                i.GetComponent<Enemies.ShootEnemy>().home = true;
             }
-            
         }
     }
 
     public void ScaleEnemies(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
     {
-        GameObject[] rbs = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach (GameObject rb in rbs)
+        foreach (Transform i in enemyHandler.transform)
         {
-            float[] multis = { 0.5f, 2 };
-            int multi = Range(0, multis.Length);
-            rb.transform.localScale *= multis[multi];
-
+            i.localScale += new Vector3(Range(-scale, scale) * Mathf.Sign(i.localScale.x), Range(-scale, scale), 0);
+            i.localScale = new Vector3(Mathf.Sign(i.localScale.x) * Mathf.Clamp(Mathf.Abs(i.localScale.x), 0.2f, 5f), Mathf.Clamp(i.localScale.y, 0.2f, 5f));
         }
     }
 
     public void EnemyRandomize(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
-
+        List<Vector3> savedPos = new List<Vector3>();
+        foreach (Transform i in enemyHandler.transform)
+        {
+            savedPos.Add(i.position);
+        }
+        foreach (Transform i in enemyHandler.transform)
+        {
+            int ind = Range(0, savedPos.Count);
+            i.position = savedPos[ind];
+            savedPos.RemoveAt(ind);
+        }
     }
 
     public void PlayerScale(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
     {
-
+        transform.localScale += new Vector3(Range(-0.5f, 0.5f) * Mathf.Sign(transform.localScale.x), Range(-0.5f, 0.5f), 1);
+        transform.localScale = new Vector3(Mathf.Clamp(Mathf.Abs(transform.localScale.x), 0.2f, 5f), Mathf.Clamp(transform.localScale.y, 0.2f, 5f), 1);
     }
 
     public void RandomizeBrightness(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
-        // var tempColor = brightnessBootleg.GetComponent<Image>().tintColor;
-        // tempColor.a = Range(0, 100);
-        // brightnessBootleg.GetComponent<Image>().tintColor = tempColor;
+        float bright = Range(0f, 1f);
+        bright -= 0.5f;
+        if(bright >= 0)
+        {
+            brightness.color = Color.white;
+        }
+        else
+        {
+            brightness.color = Color.black;
+        }
+        brightness.color = new Color(brightness.color.r, brightness.color.g, brightness.color.b, Mathf.Abs(bright) * 1.5f);
     }
 
     public void Cracks(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
@@ -206,7 +250,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void ScreenRotate(int direction, int _a, float _c, float _d, string _e, string _f, GameObject go)
     {
-        cam.transform.Rotate(0, 0, 90f/* * direction < 0 ? -1 : 1*/);
+        vcam.transform.Rotate(0, 0, 90f/* * direction < 0 ? -1 : 1*/);
     }
 
 }
