@@ -23,18 +23,24 @@ namespace Enemies
             }
 
             player = GameObject.FindGameObjectWithTag("Player");
+
+            StartCoroutine(Delete());
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            /*if (home)
+            if (home)
             {
                 Vector2 direction =( transform.position - player.transform.position).normalized;
                 rb.velocity = -direction * speed;
             }
-            else */if (!useGravity)
+            else if (!useGravity)
                 rb.velocity = transform.right * speed;
+        }
+        private void OnBecameVisible()
+        {
+            StopCoroutine(Delete());
         }
         private void OnBecameInvisible()
         {
@@ -44,6 +50,11 @@ namespace Enemies
         {
             if (!(collision.CompareTag("Enemy Projectile") || collision.CompareTag("Enemy")))
                 Destroy(gameObject);
+        }
+        IEnumerator Delete()
+        {
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);    
         }
     }
 }

@@ -67,18 +67,14 @@ namespace Enemies
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (Physics2D.OverlapCircle(new Vector2(0, -1), 0.05f, ground))
-            {
-                fall = true;
-            }
-            else
-            {
-                fall = false;
-            }
+            bool grounded = Physics2D.OverlapCircle(groundCheck.position, 0.05f, ground);
             if (Physics2D.OverlapCircle(wallCheck.position, 0.05f, ground) || (!Physics2D.OverlapCircle(floorCheck.position, 0.05f, ground) && !fall))
             {
-                facingDirection *= -1;
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                if (grounded)
+                {
+                    facingDirection *= -1;
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                }
             }
             rb.velocity = new Vector2(moveSpeed * -facingDirection * Time.fixedDeltaTime * 50, rb.velocity.y);
         }
