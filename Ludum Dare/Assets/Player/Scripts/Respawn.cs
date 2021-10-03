@@ -8,12 +8,26 @@ namespace Level
     public class Respawn : MonoBehaviour
     {
         private Transform player;
-        // Start is called before the first frame update
+        public static Respawn instance = null;
         void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else if (instance != this)
+            {
+                print("wtf");
+                print(instance);
+                Destroy(gameObject);
+            }
         }
 
+        public void RespawnPlayer()
+        {
+            SceneManager.LoadScene(1);
+        }
         // Update is called once per frame
         void Update()
         {

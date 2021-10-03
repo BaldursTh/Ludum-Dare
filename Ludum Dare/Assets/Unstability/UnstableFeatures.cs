@@ -161,7 +161,11 @@ public class UnstableFeatures : MonoBehaviour
 
     public void BlackVoids(int count, int _a, float _c, float _d, string _e, string _f, GameObject go)
     {
-        //dont nothing
+        GameObject[] voids = GameObject.FindGameObjectsWithTag("Void");
+        foreach(GameObject voi in voids)
+        {
+            voi.SetActive(true);
+        }
     }
 
     public void GlitchEffect(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)

@@ -156,6 +156,7 @@ MonoBehaviour:
   deathUnstability: 0
   wallCheck: {fileID: 5238264558401254939}
   floorCheck: {fileID: 5238264557307364578}
+  groundCheck: {fileID: 0}
   moveSpeed: 8
   fall: 0
   ground:
@@ -182,6 +183,8 @@ MonoBehaviour:
   type: 1
   useGravity: 1
   home: 0
+  anim: {fileID: 3778096613582854163}
+  shootWait: 0.35
 --- !u!95 &3778096613582854163
 Animator:
   serializedVersion: 3

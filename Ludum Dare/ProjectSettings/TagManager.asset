@@ -18,6 +18,7 @@ TagManager:
   - Enemy Spawn
   - Brightness Overlays
   - Crack
+  - Void
   layers:
   - Default
   - TransparentFX
