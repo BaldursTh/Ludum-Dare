@@ -57,14 +57,14 @@ namespace Player
 
         }
         public Vector2 point;
-        public float radius;
+        public Vector2 boxDimensions;
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireSphere(point + new Vector2(transform.position.x, transform.position.y), radius);
+            Gizmos.DrawWireCube(point + new Vector2(transform.position.x, transform.position.y), boxDimensions);
         }
         void CheckGround()
         {
-            Collider2D colliders = Physics2D.OverlapCircle(point + new Vector2(transform.position.x, transform.position.y), radius);
+            Collider2D colliders = Physics2D.OverlapBox(point + new Vector2(transform.position.x, transform.position.y), boxDimensions, 0);
 
             if (colliders != null)
             {
