@@ -53,9 +53,9 @@ public class UnstableFeatures : MonoBehaviour
         features = new List<Action<int, int, float, float, string, string, GameObject>>();
         features.Add( GravitySwap);
         features.Add(InvertedControls);
-        features.Add(SwapWaterLava);
+        //features.Add(SwapWaterLava);
         features.Add(SpawnExtraEnemies);
-        features.Add(ObjectTeleportation);
+        //features.Add(ObjectTeleportation);
         features.Add(GunShootBackwards);
         features.Add(ScreenFlip);
         features.Add(BlackVoids);
@@ -67,24 +67,30 @@ public class UnstableFeatures : MonoBehaviour
         features.Add(PlayerScale);
         features.Add(RandomizeBrightness);
         features.Add(Cracks);
-        features.Add(ScreenRotate); 
-         player = GameObject.FindGameObjectWithTag("Player");
+        features.Add(ScreenRotate);
+        spawnLocs = new List<Vector3>();
+
+        foreach (GameObject i in GameObject.FindGameObjectsWithTag("Enemy Spawn"))
+        {
+            spawnLocs.Add(i.transform.position);
+        }
+
+        Reload();
+    }
+
+    public void Reload()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
         playerMov = player.GetComponent<PlayerMovement>();
         cam = Camera.main;
         vcam = GameObject.FindGameObjectWithTag("vcam").transform;
         enemyHandler = GameObject.FindGameObjectWithTag("Enemy Container");
 
-        spawnLocs = new List<Vector3>();
-
-        foreach(GameObject i in GameObject.FindGameObjectsWithTag("Enemy Spawn"))
-        {
-            spawnLocs.Add(i.transform.position);
-        }
-
         brightness = GameObject.FindGameObjectWithTag("Brightness Overlays").GetComponent<Image>();
         gli = cam.GetComponent<Kino.DigitalGlitch>();
         crack = GameObject.FindGameObjectWithTag("Crack");
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
@@ -96,7 +102,7 @@ public class UnstableFeatures : MonoBehaviour
     public void DoRandomFeature()
     {
         int random = Range(0, features.Count);
-        features[random](2, 0, 0, 0, "", "", gameObject);
+        features[random](2, 0, 0.5f, 0, "", "", gameObject);
         print("yes");
 
 
@@ -130,6 +136,8 @@ public class UnstableFeatures : MonoBehaviour
 
     public void SpawnExtraEnemies(int count, int _b, float bigThreshold, float _d, string _e, string _f, GameObject go)
     {
+        count = 15;
+        bigThreshold = 0.7f;
         for (int i = 0; i < count; i++)
         {
             GameObject toSpawn;
@@ -181,7 +189,7 @@ public class UnstableFeatures : MonoBehaviour
     private IEnumerator SpawnErrors(int count) {
         for (int i = 0; i < count; i++)
         {
-            Instantiate(error, new Vector3(Range(-10, 10), Range(-10, 10), 3), Quaternion.identity).GetComponent<AudioSource>().Play();
+            Instantiate(error, new Vector3(cam.transform.position.x + Range(-10, 10), cam.transform.position.y + Range(-10, 10), 3), Quaternion.identity).GetComponent<AudioSource>().Play();
             yield return new WaitForSeconds(2f);
         }
     }

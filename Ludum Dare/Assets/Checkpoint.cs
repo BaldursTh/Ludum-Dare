@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager.checkpoint = transform.position;
+            GameManager.instance.checkpoint = transform.position;
         }
     }
 }

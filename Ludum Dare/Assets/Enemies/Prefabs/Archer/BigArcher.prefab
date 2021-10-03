@@ -154,6 +154,8 @@ MonoBehaviour:
   type: 1
   useGravity: 1
   home: 0
+  anim: {fileID: 5598018582014082503}
+  shootWait: 0
 --- !u!95 &5598018582014082503
 Animator:
   serializedVersion: 3

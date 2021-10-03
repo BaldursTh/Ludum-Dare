@@ -13,7 +13,7 @@ namespace Menu
         {
             if(index == 0)
             {
-                GameManager.checkpoint = new Vector3();
+                GameManager.instance.checkpoint = new Vector3();
             }
             StartCoroutine(LoadSceneAsync(index));
         }

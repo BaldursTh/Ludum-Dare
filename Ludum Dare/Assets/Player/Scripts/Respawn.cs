@@ -26,14 +26,14 @@ namespace Level
 
         public void RespawnPlayer()
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
         }
         // Update is called once per frame
         void Update()
         {
             if (player.position.y <= transform.position.y)
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene(2);
             }
         }
     }

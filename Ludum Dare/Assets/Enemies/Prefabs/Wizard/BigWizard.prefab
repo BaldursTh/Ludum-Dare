@@ -215,7 +215,7 @@ MonoBehaviour:
   useGravity: 0
   home: 0
   anim: {fileID: 2759619876109331336}
-  shootWait: 0
+  shootWait: 0.45
 --- !u!60 &385059389338383595
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -19,6 +19,9 @@ TagManager:
   - Brightness Overlays
   - Crack
   - Void
+  - Hourglass
+  - USlider
+  - Pause
   layers:
   - Default
   - TransparentFX

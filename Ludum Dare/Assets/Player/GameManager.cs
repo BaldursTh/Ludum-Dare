@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public enum GameState
@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject pause;
     public static GameManager instance;
 
-    public static Vector3 checkpoint = new Vector3();
+    public Vector3 checkpoint = new Vector3();
     public Vector3 start;
 
     private void Awake()
@@ -20,15 +20,23 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
         {
             print("wtf");
             print(instance);
             Destroy(gameObject);
+            instance.GetComponent<UnstableFeatures>().Reload();
+            instance.GetComponent<UnstabilityManager>().Reload();
+            instance.pause = GameObject.FindGameObjectWithTag("Pause");
+        instance.state = GameState.Play;
         }
+        pause.SetActive(false);
         state = GameState.Play;
+        CheckState();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -48,21 +56,13 @@ public class GameManager : MonoBehaviour
 
     public void UpdateState(int state)
     {
-        switch (state)
+        this.state = state switch
         {
-            case 0:
-                this.state = GameState.Play;
-                break;
-            case 1:
-                this.state = GameState.Pause;
-                break;
-            case 2:
-                this.state = GameState.Dead;
-                break;
-            default:
-                this.state = GameState.Play;
-                break;
-        }
+            0 => GameState.Play,
+            1 => GameState.Pause,
+            2 => GameState.Dead,
+            _ => GameState.Play,
+        };
         CheckState();
     }
     

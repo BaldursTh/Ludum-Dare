@@ -40,7 +40,7 @@ namespace Player
             jumps = 2;
             if (GameManager.instance != null)
             {
-                transform.position = GameManager.checkpoint;
+                transform.position = GameManager.instance.checkpoint;
                 Debug.Log("Yes;");
             }
         }
