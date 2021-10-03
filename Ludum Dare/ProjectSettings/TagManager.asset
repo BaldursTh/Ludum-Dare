@@ -14,6 +14,10 @@ TagManager:
   - Enemy
   - Enemy Container
   - Player
+  - vcam
+  - Enemy Spawn
+  - Brightness Overlays
+  - Crack
   layers:
   - Default
   - TransparentFX

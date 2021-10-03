@@ -56,11 +56,10 @@ namespace Player
         }
 
 
-        void Update()
+        void FixedUpdate()
         {
             HandleInput();
             
-
         }
         public Vector2 point;
         public Vector2 boxDimensions;
@@ -71,8 +70,6 @@ namespace Player
         }
         void CheckGround()
         {
-            
-            
         }
         bool canShoot = true;
         void Shoot()
@@ -172,7 +169,7 @@ namespace Player
 
                 rb.velocity = new Vector2(moveSpeedCap * direction * invertedControls, rb.velocity.y);
             }*/
-            transform.localScale = new Vector2(-facingDirection, transform.localScale.y);
+            transform.localScale = new Vector2(-facingDirection * Mathf.Abs(transform.localScale.x), transform.localScale.y);
 
         }
         private void OnCollisionEnter2D(Collision2D collision)
