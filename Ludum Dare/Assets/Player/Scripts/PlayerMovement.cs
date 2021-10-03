@@ -56,7 +56,7 @@ namespace Player
         }
 
 
-        void FixedUpdate()
+        void Update()
         {
             HandleInput();
             
@@ -93,6 +93,7 @@ namespace Player
         void HandleInput()
         {
             if (state == PlayerState.Dashing) return;
+            if (GameManager.instance.state == GameManager.GameState.Pause) return;
 
             CheckGround();
             Move(Input.GetAxisRaw("Horizontal"));
@@ -102,8 +103,10 @@ namespace Player
             //}
             if (Input.GetKeyDown(KeyCode.X))
             {
+               
                 if (canDash)
                 {
+                    
                     StartCoroutine(Dash());
                 }
             }
@@ -115,6 +118,7 @@ namespace Player
 
             if (Input.GetKeyDown(KeyCode.C) && jumps >= 1)
             {
+                
                 Jump();
             }
         }

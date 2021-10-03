@@ -8,10 +8,13 @@ public class PlayerHealth : MonoBehaviour
     public PlayerData data;
     public Slider greenSlider;
     public Slider whiteSlider;
+    public Animator anim;
 
     public float currenthealthGain;
     public float maxHealthGain = 100;
     public float currentHealth;
+
+    public GameObject gameOverScreen;
 
     public float maxHealth => data.maxHealth;
     public float healthGain => data.healthGain;
@@ -34,6 +37,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.collider.gameObject.layer == 7)
         {
             LooseHealth();
@@ -64,7 +68,27 @@ public class PlayerHealth : MonoBehaviour
             LooseHealth();
             StartCoroutine(Invincibility());
         }
+        if (collision.CompareTag("Void"))
+        {
+            Death();
+        }
     }
+
+    public void Death()
+    {
+        GetComponent<Player.PlayerMovement>().enabled = false;
+        GetComponent<Rigidbody2D>().isKinematic = true;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Collider2D>().enabled = false;
+        anim.SetInteger("PlayerState", 0);
+        anim.SetTrigger("Death");
+        gameOverScreen.SetActive(true);
+        
+    }
+
+
+
+
     public GameObject heart1;
     public GameObject heart2;
     public GameObject heart3;
@@ -110,7 +134,7 @@ public class PlayerHealth : MonoBehaviour
              heart2.GetComponent<Image>().enabled = false;
              heart1.GetComponent<Image>().enabled = false;
              heart3.GetComponent<Image>().enabled = false;
-             print("u lost");
+            Death();
          }
     }
 }

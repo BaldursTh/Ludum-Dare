@@ -17,6 +17,9 @@ namespace Enemies
         private float cacheSpeed;
         private Transform player;
         public bool home;
+        public Animator anim;
+        public float shootWait;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -52,8 +55,9 @@ namespace Enemies
                 {
                     transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
                 }
+                anim.SetTrigger("Shoot");
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(shootWait);
 
                 transform.localScale = new Vector3(baseBehave.facingDirection, transform.localScale.y);
 

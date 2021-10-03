@@ -15,9 +15,16 @@ public class Void : MonoBehaviour
     }
     private void Update()
     {
-        while (Time.time - time <= growthTime)
+        if (Time.time - time <= growthTime)
         {
-            transform.localScale += new Vector3(sizeGrowSpeed, sizeGrowSpeed, sizeGrowSpeed);
+            transform.localScale += new Vector3(sizeGrowSpeed * Time.deltaTime, sizeGrowSpeed * Time.deltaTime, sizeGrowSpeed * Time.deltaTime);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer != 6)
+        {
+            Destroy(collision.gameObject);
         }
     }
 }

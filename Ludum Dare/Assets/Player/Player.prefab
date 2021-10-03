@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4671713532468955354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.07, y: 1.36, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -153,13 +153,17 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2152594979763577804, guid: b80869207e631434f90c232083dfd479, type: 3}
   invertedControls: 1
   invertedGun: 1
+  anim: {fileID: 284093789}
   ground:
     serializedVersion: 2
     m_Bits: 64
+  dashCloud: {fileID: 8994716431933838643, guid: 89bebd310ddf90d4abbdf5c840df9417, type: 3}
+  jumpCloud: {fileID: 0}
   state: 0
-  point: {x: 0, y: -1}
-  boxDimensions: {x: 0, y: 0}
+  point: {x: 0, y: -0.4}
+  boxDimensions: {x: 0.98, y: 0.2}
   canDash: 0
+  jumps: 0
 --- !u!114 &4671713532468955344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +179,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: b2cb369f4f848b34493f0c1da910b499, type: 2}
   greenSlider: {fileID: 0}
   whiteSlider: {fileID: 0}
+  anim: {fileID: 0}
   currenthealthGain: 0
   maxHealthGain: 100
   currentHealth: 0
