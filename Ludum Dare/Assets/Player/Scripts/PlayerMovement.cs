@@ -59,7 +59,7 @@ namespace Player
 
         }
         public Vector2 point;
-        public float radius;
+        public Vector2 boxDimensions;
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.black;
