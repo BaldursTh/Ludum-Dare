@@ -78,7 +78,7 @@ namespace Player
             Destroy(_bulletPrefab, 10);
             UnstabilityManager.instance.AddUnstability(shootUnstability);
             StartCoroutine(ShootCooldown());
-            UnstabilityManager.instance.features.GlitchEffect(0,0,0,0,"","",null);
+            UnstabilityManager.instance.features.Cracks(0,0,0,0,"","",null);
         }
         IEnumerator ShootCooldown()
         {

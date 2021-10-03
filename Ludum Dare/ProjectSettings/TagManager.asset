@@ -17,6 +17,7 @@ TagManager:
   - vcam
   - Enemy Spawn
   - Brightness Overlays
+  - Crack
   layers:
   - Default
   - TransparentFX

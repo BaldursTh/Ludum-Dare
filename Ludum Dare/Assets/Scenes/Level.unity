@@ -1692,6 +1692,56 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &718752399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 718752400}
+  - component: {fileID: 718752401}
+  m_Layer: 0
+  m_Name: Crack Holder
+  m_TagString: Crack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &718752400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718752399}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.07, y: 2.36, z: -10.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1818360608 &718752401
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718752399}
+  m_Enabled: 1
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0.07, y: 2.36, z: -10.5}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_IsContraintActive: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 73849325}
+    weight: 1
 --- !u!4 &722287451 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6339536512430822074, guid: 93c44da6b1dc7c14197889abb4501964, type: 3}
@@ -2738,6 +2788,8 @@ MonoBehaviour:
   - {fileID: 298901344283654820, guid: d7955c089504dcd4fa25ff4da7ec4095, type: 3}
   brightness: {fileID: 0}
   gli: {fileID: 0}
+  crack: {fileID: 0}
+  cracks: {fileID: 7189119876774155180, guid: 0d2b8c0d7e769374e8997bcc35665957, type: 3}
 --- !u!4 &1235732698
 Transform:
   m_ObjectHideFlags: 0

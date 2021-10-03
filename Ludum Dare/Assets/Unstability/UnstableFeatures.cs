@@ -26,6 +26,8 @@ public class UnstableFeatures : MonoBehaviour
     [Header("Overlays")]
     public Image brightness;
     public Kino.DigitalGlitch gli;
+    public GameObject crack;
+    public GameObject cracks;
 
     private void Start()
     {
@@ -82,6 +84,7 @@ public class UnstableFeatures : MonoBehaviour
 
         brightness = GameObject.FindGameObjectWithTag("Brightness Overlays").GetComponent<Image>();
         gli = cam.GetComponent<Kino.DigitalGlitch>();
+        crack = GameObject.FindGameObjectWithTag("Crack");
     }
     private void Update()
     {
@@ -245,7 +248,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void Cracks(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
-
+        Instantiate(cracks, new Vector3(Range(-8.5f, 8.5f), Range(-2, 6.5f)), Quaternion.identity, crack.transform);
     }
 
     public void ScreenRotate(int direction, int _a, float _c, float _d, string _e, string _f, GameObject go)
