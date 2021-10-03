@@ -15,6 +15,8 @@ namespace Player
         public int invertedControls = 1;
         public int invertedGun = 1;
 
+        public LayerMask ground;
+
         #region Parameters
         public float moveSpeedCap => data.moveSpeedCap;
 
@@ -60,20 +62,13 @@ namespace Player
         public float radius;
         private void OnDrawGizmos()
         {
-            Gizmos.DrawWireSphere(point + new Vector2(transform.position.x, transform.position.y), radius);
+            Gizmos.color = Color.black;
+            Gizmos.DrawCube(point + new Vector2(transform.position.x, transform.position.y), new Vector3(0.9f, 0.2f, 1f));
         }
         void CheckGround()
         {
-            Collider2D colliders = Physics2D.OverlapCircle(point + new Vector2(transform.position.x, transform.position.y), radius);
-
-            if (colliders != null)
-            {
-                if (colliders.CompareTag("Ground"))
-                {
-                    state = PlayerState.Walking;
-                }
-            }
-
+            if (Physics2D.OverlapBox(point + new Vector2(transform.position.x, transform.position.y), new Vector2(0.9f, 0.2f), ground))
+                state = PlayerState.Walking;
         }
         bool canShoot = true;
         void Shoot()
@@ -97,47 +92,38 @@ namespace Player
         void HandleInput()
         {
             if (state == PlayerState.Dashing) return;
-            
-                CheckGround();
 
+            CheckGround();
 
-
-
-               
-
-                if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                Move(1);
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                Move(-1);
+            }
+            else
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                if (canDash)
                 {
-                    Move(1);
+                    StartCoroutine(Dash());
                 }
-                else if (Input.GetKey(KeyCode.LeftArrow))
-                {
-                    Move(-1);
-                }
-                else
-                {
-                    rb.velocity = new Vector2(0, rb.velocity.y);
-                }
-                if (Input.GetKeyDown(KeyCode.X))
-                {
-                    if (canDash)
-                    {
-                        StartCoroutine(Dash());
-                    }
-                }
+            }
 
-                else if (Input.GetKeyDown(KeyCode.Z) && canShoot == true)
-                {
-                    Shoot();
-                }
+            else if (Input.GetKeyDown(KeyCode.Z) && canShoot == true)
+            {
+                Shoot();
+            }
 
-                if (state == PlayerState.Walking && Input.GetKeyDown(KeyCode.C))
-                {
-                    Jump();
-                }
-            
-
-            
-
+            if (state == PlayerState.Walking && Input.GetKeyDown(KeyCode.C))
+            {
+                Jump();
+            }
         }
         public bool canDash = true;
         IEnumerator Dash()
@@ -171,7 +157,7 @@ namespace Player
             if (rb.velocity.magnitude > moveSpeedCap)
             {
 
-                rb.velocity = new Vector2(moveSpeedCap * direction, rb.velocity.y);
+                rb.velocity = new Vector2(moveSpeedCap * direction * invertedControls, rb.velocity.y);
             }
             transform.localScale = new Vector2(-facingDirection, transform.localScale.y);
 
@@ -182,12 +168,5 @@ namespace Player
             rb.AddForce(new Vector2(0, jumpVelocity * (rb.gravityScale/Mathf.Abs(rb.gravityScale) )));
             state = PlayerState.Jumping;
         }
-
-
-
-
-
-
-
     }
 }
