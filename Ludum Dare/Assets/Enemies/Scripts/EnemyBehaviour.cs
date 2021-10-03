@@ -11,7 +11,7 @@ namespace Enemies
         public int health = 5;
         public int deathUnstability;
         [SerializeField]
-        private Transform wallCheck, floorCheck;
+        private Transform wallCheck, floorCheck, groundCheck;
         private Rigidbody2D rb;
         private SpriteRenderer spr;
         public float moveSpeed;
@@ -60,10 +60,21 @@ namespace Enemies
             }
 
         }
-
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(new Vector2(0, -1), 0.05f);
+        }
         // Update is called once per frame
         void FixedUpdate()
         {
+            if (Physics2D.OverlapCircle(new Vector2(0, -1), 0.05f, ground))
+            {
+                fall = true;
+            }
+            else
+            {
+                fall = false;
+            }
             if (Physics2D.OverlapCircle(wallCheck.position, 0.05f, ground) || (!Physics2D.OverlapCircle(floorCheck.position, 0.05f, ground) && !fall))
             {
                 facingDirection *= -1;

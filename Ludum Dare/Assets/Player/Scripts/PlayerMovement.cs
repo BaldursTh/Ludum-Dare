@@ -14,8 +14,10 @@ namespace Player
         public GameObject bulletPrefab;
         public int invertedControls = 1;
         public int invertedGun = 1;
-
+        public Animator anim;
         public LayerMask ground;
+        public GameObject dashCloud;
+        public GameObject jumpCloud;
 
         #region Parameters
         public float moveSpeedCap => data.moveSpeedCap;
@@ -35,6 +37,7 @@ namespace Player
         {
             rb = GetComponent<Rigidbody2D>();
             facingDirection = 1;
+            jumps = 2;
         }
         public enum PlayerState
         {
@@ -63,18 +66,18 @@ namespace Player
         public Vector2 boxDimensions;
         private void OnDrawGizmos()
         {
-            Gizmos.color = Color.black;
-            Gizmos.DrawCube(point + new Vector2(transform.position.x, transform.position.y), new Vector3(0.9f, 0.2f, 1f));
+            
+            Gizmos.DrawWireCube(point + new Vector2(transform.position.x, transform.position.y), boxDimensions);
         }
         void CheckGround()
         {
-            if (Physics2D.OverlapBox(point + new Vector2(transform.position.x, transform.position.y), new Vector2(0.9f, 0.2f), ground))
-                state = PlayerState.Walking;
+            
+            
         }
         bool canShoot = true;
         void Shoot()
         {
-            
+            anim.SetTrigger("Shoot");
             GameObject _bulletPrefab = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             _bulletPrefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(bulletSpeed * facingDirection * invertedGun, 0));
             Destroy(_bulletPrefab, 10);
@@ -113,7 +116,7 @@ namespace Player
                 Shoot();
             }
 
-            if (state == PlayerState.Walking && Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.C) && jumps >= 1)
             {
                 Jump();
             }
@@ -128,7 +131,8 @@ namespace Player
             state = PlayerState.Dashing;
            
             rb.velocity = new Vector2(dashSpeed * facingDirection, 0);
-            
+            GameObject h = Instantiate(dashCloud, transform.position + new Vector3(1.4f * facingDirection, -0.58f, 0), Quaternion.identity);
+            h.transform.localScale = new Vector3(h.transform.localScale.x * facingDirection, h.transform.localScale.y, h.transform.localScale.z);
             yield return new WaitForSeconds(dashTime);
             
             StartCoroutine(DashCooldown());
@@ -150,7 +154,15 @@ namespace Player
             int dir = Mathf.RoundToInt(direction);
             if (dir != 0)
             {
+                if (state != PlayerState.Jumping)
+                {
+                    anim.SetInteger("PlayerState", 2);
+                }
                 facingDirection = dir * invertedControls;
+            }
+            else if (state != PlayerState.Jumping)
+            {
+                anim.SetInteger("PlayerState", 1);
             }
             Vector3 targetVelocity = new Vector2(moveSpeedCap * direction * invertedControls, rb.velocity.y);
             rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, moveSmooth);
@@ -163,11 +175,29 @@ namespace Player
             transform.localScale = new Vector2(-facingDirection, transform.localScale.y);
 
         }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.layer == 6)
+            {
+                
+                state = PlayerState.Walking;
+                jumps = 2;
+
+            }
+        }
+        public int jumps;
         void Jump()
         {
+            if (jumps == 1)
+            {
+                GameObject h = Instantiate(dashCloud, transform.position + new Vector3(0.15f * -facingDirection, -1f, 0), Quaternion.Euler(new Vector3(0, 0, 90)));
+            }
+            jumps--;
+            
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0, jumpVelocity * (rb.gravityScale/Mathf.Abs(rb.gravityScale) )));
             state = PlayerState.Jumping;
+            anim.SetInteger("PlayerState", 3);
         }
     }
 }
