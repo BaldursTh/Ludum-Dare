@@ -179,10 +179,11 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: b2cb369f4f848b34493f0c1da910b499, type: 2}
   greenSlider: {fileID: 0}
   whiteSlider: {fileID: 0}
-  anim: {fileID: 0}
+  anim: {fileID: 284093789}
   currenthealthGain: 0
   maxHealthGain: 100
   currentHealth: 0
+  gameOverScreen: {fileID: 0}
   unstableFeatures: {fileID: 0}
   heart1: {fileID: 0}
   heart2: {fileID: 0}

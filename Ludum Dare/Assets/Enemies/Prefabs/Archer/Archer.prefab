@@ -184,7 +184,7 @@ MonoBehaviour:
   type: 0
   useGravity: 1
   home: 0
-  anim: {fileID: 0}
+  anim: {fileID: 746252638023202350}
   shootWait: 0.5
 --- !u!95 &746252638023202350
 Animator:

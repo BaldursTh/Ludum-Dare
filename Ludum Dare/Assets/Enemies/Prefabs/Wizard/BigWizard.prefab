@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 298901344283654827}
   - component: {fileID: 179676323819824523}
   - component: {fileID: 385059389338383595}
+  - component: {fileID: 2759619876109331336}
   m_Layer: 7
   m_Name: BigWizard
   m_TagString: Enemy
@@ -213,6 +214,8 @@ MonoBehaviour:
   type: 2
   useGravity: 0
   home: 0
+  anim: {fileID: 2759619876109331336}
+  shootWait: 0
 --- !u!60 &385059389338383595
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -244,6 +247,25 @@ PolygonCollider2D:
       - {x: -0.75, y: -0.75}
       - {x: 0.75, y: -0.75}
       - {x: 0.75, y: 0.65746784}
+--- !u!95 &2759619876109331336
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298901344283654820}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06a09ba58ccd2e6419f24084bb38bac9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4321464187994682326
 GameObject:
   m_ObjectHideFlags: 0

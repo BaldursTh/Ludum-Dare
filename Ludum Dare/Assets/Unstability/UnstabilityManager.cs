@@ -51,18 +51,23 @@ public class UnstabilityManager : MonoBehaviour
             features.DoRandomFeature();
 
         }
+        if(currentUnstability >= maxUnstability)
+        {
+            features.gli.intensity += Time.deltaTime;
+        }
 
     }
     public void AddUnstability(float addition)
     {
         currentUnstability += addition;
         featureInterval -= addition;
+        featureInterval = Mathf.Clamp(featureInterval, 0.5f, 300f);
         float stabilityPercentage = currentUnstability / maxUnstability;
         CheckHourGlass(stabilityPercentage);
         if (stabilityPercentage >= 1)
         {
             anim.SetInteger("Hourglass", 5);
-            print("you lost");
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>().Death();
         }
         
     }
