@@ -12,33 +12,28 @@ namespace Enemies
         public bool useGravity = false;
         public bool home;
         public GameObject player;
-        private void Awake()
+        private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
-            player = GameObject.FindGameObjectWithTag("Player");
-            
             if (useGravity)
             {
                 rb.gravityScale = 1;
                 rb.AddForce(transform.right * speed);
                 rb.constraints = RigidbodyConstraints2D.None;
-                
             }
-            
+
+            player = GameObject.FindGameObjectWithTag("Player");
         }
 
         // Update is called once per frame
         void FixedUpdate()
         {
-            
-
-            if (home)
+            /*if (home)
             {
-                
                 Vector2 direction =( transform.position - player.transform.position).normalized;
                 rb.velocity = -direction * speed;
             }
-            else if (!useGravity)
+            else */if (!useGravity)
                 rb.velocity = transform.right * speed;
         }
         private void OnBecameInvisible()
@@ -48,7 +43,6 @@ namespace Enemies
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (!(collision.CompareTag("Enemy Projectile") || collision.CompareTag("Enemy")))
-                
                 Destroy(gameObject);
         }
     }

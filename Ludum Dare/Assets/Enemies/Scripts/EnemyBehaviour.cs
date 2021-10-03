@@ -20,7 +20,6 @@ namespace Enemies
         //private Animator anim;
         [SerializeField] private Collider2D[] disableOnDeath;
         //private float deathTick = 1.5f;
-        private bool moving = true;
         public int facingDirection;
         public GameObject healthGain;
         //public ParticleSystem explode;
@@ -38,7 +37,7 @@ namespace Enemies
 
         private void Update()
         {
-            
+
         }
 
         public void TakeDamage()
@@ -57,7 +56,7 @@ namespace Enemies
                 //deathTick -= Time.deltaTime;
                 moveSpeed = 0;
                 //if (deathTick <= 0)
-                    Destroy(gameObject);
+                Destroy(gameObject);
             }
 
         }
@@ -65,30 +64,16 @@ namespace Enemies
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (moving)
+            if (Physics2D.OverlapCircle(wallCheck.position, 0.05f, ground) || (!Physics2D.OverlapCircle(floorCheck.position, 0.05f, ground) && !fall))
             {
-                if (Physics2D.OverlapCircle(wallCheck.position, 0.05f, ground) || (!Physics2D.OverlapCircle(floorCheck.position, 0.05f, ground) && !fall))
-                {
-                    
-                    facingDirection *= -1;
-                    transform.localScale = new Vector3(facingDirection, transform.localScale.y, transform.localScale.z);
-                }
-                rb.velocity = new Vector2(moveSpeed * -facingDirection * Time.fixedDeltaTime * 50, rb.velocity.y);
+                facingDirection *= -1;
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             }
-            else
-            {
-                if (Physics2D.OverlapCircle(wallCheck.position, 0.05f, ground) || (!Physics2D.OverlapCircle(floorCheck.position, 0.05f, ground) && !fall))
-                {
-                    
-                    facingDirection *= -1;
-                    transform.localScale = new Vector3(facingDirection, transform.localScale.y, transform.localScale.z);
-                }
-                rb.velocity = new Vector2(moveSpeed * -facingDirection * Time.fixedDeltaTime * 50 * 2, rb.velocity.y);
-            }
+            rb.velocity = new Vector2(moveSpeed * -facingDirection * Time.fixedDeltaTime * 50, rb.velocity.y);
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if(other.CompareTag("Player Projectile"))
+            if (other.CompareTag("Player Projectile"))
             {
                 TakeDamage();
             }

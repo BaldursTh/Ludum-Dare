@@ -34,7 +34,7 @@ namespace Enemies
 
                yield return new WaitForSeconds(waitTime);
                 Vector3 target = player.position;
-                baseBehave.enabled = false;
+                baseBehave.moveSpeed = 0;
                 target.z = 0;
                 target.x = target.x - transform.position.x;
                 target.y = target.y - transform.position.y;
@@ -46,20 +46,16 @@ namespace Enemies
 
                 if (target.x <= 0)
                 {
-                    transform.localScale = new Vector3(1, transform.localScale.y);
+                    transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y);
                 }
                 else if (target.x > 0)
                 {
-                    transform.localScale = new Vector3(-1, transform.localScale.y);
+                    transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
                 }
 
                 yield return new WaitForSeconds(0.5f);
 
-                baseBehave.enabled = true;
                 transform.localScale = new Vector3(baseBehave.facingDirection, transform.localScale.y);
-
-
-
 
                 switch (type)
                 {
@@ -79,7 +75,7 @@ namespace Enemies
                 
                 yield return new WaitForSeconds(0.3f);
 
-                baseBehave.enabled = true;
+                baseBehave.moveSpeed = cacheSpeed;
                 transform.localScale = new Vector3(baseBehave.facingDirection, transform.localScale.y);
 
             }

@@ -129,7 +129,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 4
-  m_Material: {fileID: 6200000, guid: bbf172ba40da7bf409a4956249bc901a, type: 2}
+  m_Material: {fileID: 6200000, guid: cd5640af7bbb30742bb576b0337f300b, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -153,6 +153,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2152594979763577804, guid: b80869207e631434f90c232083dfd479, type: 3}
   invertedControls: 1
   invertedGun: 1
+  ground:
+    serializedVersion: 2
+    m_Bits: 0
   state: 0
   point: {x: 0, y: -0.7}
   radius: 0.125
