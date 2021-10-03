@@ -12,6 +12,7 @@ namespace Enemies
         public bool useGravity = false;
         public bool home;
         public GameObject player;
+        public int type;
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -25,6 +26,8 @@ namespace Enemies
             player = GameObject.FindGameObjectWithTag("Player");
 
             StartCoroutine(Delete());
+
+            GetComponent<Animator>().SetInteger("Type", type);
         }
 
         // Update is called once per frame
@@ -54,6 +57,9 @@ namespace Enemies
         IEnumerator Delete()
         {
             yield return new WaitForSeconds(1f);
+            var campos = Camera.main.transform.position;
+            Debug.LogWarning(Vector3.Distance(new Vector3(transform.position.x, transform.position.y), new Vector3(campos.x, campos.y)));
+            if (Vector3.Distance(new Vector3(transform.position.x, transform.position.y), new Vector3(campos.x, campos.y)) >= 10f) 
             Destroy(gameObject);    
         }
     }

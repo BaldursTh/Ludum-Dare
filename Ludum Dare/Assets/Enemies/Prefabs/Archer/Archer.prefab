@@ -186,6 +186,7 @@ MonoBehaviour:
   home: 0
   anim: {fileID: 746252638023202350}
   shootWait: 0.5
+  bulType: 1
 --- !u!95 &746252638023202350
 Animator:
   serializedVersion: 3

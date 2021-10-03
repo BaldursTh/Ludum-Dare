@@ -51,6 +51,7 @@ MonoBehaviour:
   useGravity: 0
   home: 0
   player: {fileID: 0}
+  type: 0
 --- !u!212 &1864741507951737411
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ Animator:
   m_GameObject: {fileID: 1864741507951737409}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4a3f55dfc19405d4d8c52e531c921e2a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

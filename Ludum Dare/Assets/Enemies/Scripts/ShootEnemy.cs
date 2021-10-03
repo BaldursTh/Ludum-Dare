@@ -20,6 +20,8 @@ namespace Enemies
         public Animator anim;
         public float shootWait;
 
+        public int bulType;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -91,6 +93,7 @@ namespace Enemies
             bul.useGravity = useGravity;
             bul.speed = bulletSpeed;
             bul.home = home;
+            bul.type = bulType;
         }
 
         void TripleTarget(float TargetAngle)
@@ -101,6 +104,7 @@ namespace Enemies
                 bul.useGravity = useGravity;
                 bul.speed = bulletSpeed;
                 bul.home = home;
+                bul.type = bulType;
             }
         }
 
@@ -112,6 +116,7 @@ namespace Enemies
                 bul.useGravity = useGravity;
                 bul.speed = bulletSpeed;
                 bul.home = home;
+                bul.type = bulType;
             }
         }
     }
