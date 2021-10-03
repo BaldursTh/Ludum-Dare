@@ -11,6 +11,10 @@ namespace Menu
         public Slider bar;
         public void LoadLevel(int index)
         {
+            if(index == 0)
+            {
+                GameManager.checkpoint = new Vector3();
+            }
             StartCoroutine(LoadSceneAsync(index));
         }
         IEnumerator LoadSceneAsync(int index)
