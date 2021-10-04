@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b255d08505a9c6478b575b199c33068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxUnstability: 1
+  maxUnstability: 30
   currentUnstability: 0
   stabilityTimer: 0
   featureInterval: 30
@@ -115,3 +115,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191a336583bb40d4187d97826ca57d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SceneIndex: 2

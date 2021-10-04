@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4022af8d129482e4bb7da99b83170b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 1
   deathUnstability: 0
   wallCheck: {fileID: 6339536513197901590}
   floorCheck: {fileID: 6339536512145880559}
