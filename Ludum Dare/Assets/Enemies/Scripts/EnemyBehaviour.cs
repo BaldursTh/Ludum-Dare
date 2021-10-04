@@ -65,7 +65,8 @@ namespace Enemies
         IEnumerator Ded()
         {
             ded = true;
-            aud2.Play();
+            if(aud2 != null)
+                aud2.Play();
             GetComponent<Rigidbody2D>().isKinematic = true;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Collider2D>().enabled = false;
