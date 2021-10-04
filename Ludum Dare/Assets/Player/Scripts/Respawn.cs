@@ -9,6 +9,9 @@ namespace Level
     {
         private Transform player;
         public static Respawn instance = null;
+
+        public int SceneIndex = 2;
+
         void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -33,7 +36,7 @@ namespace Level
         {
             if (player.position.y <= transform.position.y)
             {
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(SceneIndex);
             }
         }
     }
