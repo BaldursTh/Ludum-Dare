@@ -51,7 +51,7 @@ public class UnstableFeatures : MonoBehaviour
         features.Add("Cracks", Cracks);
         features.Add("ScreenRotate", ScreenRotate);*/
         features = new List<Action<int, int, float, float, string, string, GameObject>>();
-        features.Add( GravitySwap);
+        //features.Add( GravitySwap);
         features.Add(InvertedControls);
         //features.Add(SwapWaterLava);
         features.Add(SpawnExtraEnemies);
@@ -91,14 +91,6 @@ public class UnstableFeatures : MonoBehaviour
         crack = GameObject.FindGameObjectWithTag("Crack");
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            GravitySwap(0, 0, 0, 0, "", "", gameObject);
-            UnstabilityManager.instance.AddUnstability(10);
-        }
-    }
     public void DoRandomFeature()
     {
         int random = Range(0, features.Count);
