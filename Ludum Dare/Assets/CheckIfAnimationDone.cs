@@ -16,7 +16,7 @@ public class CheckIfAnimationDone : MonoBehaviour
     {
         if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+            Application.Quit();
         }
     }
 }

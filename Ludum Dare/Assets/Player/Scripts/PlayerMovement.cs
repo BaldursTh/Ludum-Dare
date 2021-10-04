@@ -21,7 +21,7 @@ namespace Player
         public AudioSource aud;
         public GameObject bulSpawn;
         public AudioSource aud2;
-
+        public AudioSource aud3;
         #region Parameters
         public float moveSpeedCap => data.moveSpeedCap;
 

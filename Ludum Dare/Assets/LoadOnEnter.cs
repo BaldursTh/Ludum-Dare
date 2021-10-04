@@ -22,6 +22,7 @@ public class LoadOnEnter : MonoBehaviour
     {
         LoadScreen.SetActive(true);
         AsyncOperation loadScene = SceneManager.LoadSceneAsync(Scene);
+        GameManager.instance.checkpoint = Vector3.zero;
         while (!loadScene.isDone)
         {
             float progress = Mathf.Clamp01(loadScene.progress / 0.9f);

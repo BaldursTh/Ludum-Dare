@@ -16,9 +16,10 @@ public class UnstabilityManager : MonoBehaviour
     public Slider slider;
     public GameObject hourglass;
     public Animator anim;
+    public AudioSource aud;
 
     public int currentGlitches;
-
+    public float audIncrease;
     private string scene;
 
     void Start()
@@ -35,8 +36,8 @@ public class UnstabilityManager : MonoBehaviour
             print(instance);
             Destroy(gameObject);
         }
-    #endregion
-
+        #endregion
+        aud = GameObject.FindGameObjectWithTag("Player").GetComponent<Player.PlayerMovement>().aud3;
         features = GetComponent<UnstableFeatures>();
         currentUnstability = 0;
         previousFeatureTime = Time.time;
@@ -77,6 +78,7 @@ public class UnstabilityManager : MonoBehaviour
         {
             previousFeatureTime = Time.time;
             currentGlitches++;
+            aud.pitch += audIncrease;
             features.DoRandomFeature();
 
         }
@@ -89,6 +91,7 @@ public class UnstabilityManager : MonoBehaviour
         featureInterval = Mathf.Clamp(featureInterval, 0.5f, 300f);
         float stabilityPercentage = currentUnstability / maxUnstability;
         CheckHourGlass(stabilityPercentage);
+        
         if (stabilityPercentage >= 1)
         {
             anim.SetInteger("Hourglass", 5);
