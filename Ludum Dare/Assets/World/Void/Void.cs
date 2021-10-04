@@ -24,7 +24,17 @@ public class Void : MonoBehaviour
     {
         if (collision.gameObject.layer != 6)
         {
-            Destroy(collision.gameObject);
+            if (!collision.gameObject.CompareTag("Player"))
+                Destroy(collision.gameObject);
+            else
+            {
+                var hp =
+                collision.gameObject.GetComponent<PlayerHealth>();
+
+                hp.LooseHealth();
+                hp.LooseHealth();
+                hp.LooseHealth();
+            }
         }
     }
 }
