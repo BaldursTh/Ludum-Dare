@@ -8,6 +8,7 @@ public class DragDialog : MonoBehaviour
 {
     public Transform tf;
     public BoxCollider2D col;
+	public BoxCollider2D clo;
     public AudioSource audioSource;
 
     private void OnMouseDrag()
@@ -16,9 +17,11 @@ public class DragDialog : MonoBehaviour
         Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
         transform.position = mousePos2D;
         col.enabled = false;
+		clo.enabled = false;
     }
     private void OnMouseUp()
     {
         col.enabled = true;
+		clo.enabled = true;
     }
 }
