@@ -39,7 +39,7 @@ namespace Level
                 player.GetComponent<PlayerHealth>().LooseHealth();
                 player.GetComponent<PlayerHealth>().LooseHealth();
                 player.GetComponent<PlayerHealth>().LooseHealth();
-                gameObject.SetActive(false);
+                this.enabled = false;
             }
         }
     }
