@@ -37,7 +37,7 @@ public class UnstabilityManager : MonoBehaviour
             Destroy(gameObject);
         }
         #endregion
-        aud = GameObject.FindGameObjectWithTag("Player").GetComponent<Player.PlayerMovement>().aud3;
+        
         features = GetComponent<UnstableFeatures>();
         currentUnstability = 0;
         previousFeatureTime = Time.time;
@@ -78,6 +78,7 @@ public class UnstabilityManager : MonoBehaviour
         {
             previousFeatureTime = Time.time;
             currentGlitches++;
+            aud = GameObject.FindGameObjectWithTag("Player").GetComponent<Player.PlayerMovement>().aud3;
             aud.pitch += audIncrease;
             features.DoRandomFeature();
 
