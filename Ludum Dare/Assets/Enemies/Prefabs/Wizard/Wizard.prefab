@@ -216,9 +216,9 @@ MonoBehaviour:
   bullet: {fileID: 1864741507951737409, guid: 5a0c6e6ea87655d41bfdf04d458bdcf7, type: 3}
   waitTime: 3.5
   bulletSpeed: 6
-  type: 1
+  type: 2
   useGravity: 0
-  home: 1
+  home: 0
   anim: {fileID: 1605266491954669235}
   shootWait: 0.45
   bulType: 0

@@ -58,6 +58,7 @@ public class UnstabilityManager : MonoBehaviour
             currentGlitches = 0;
             currentUnstability = 0;
             featureInterval = 30;
+            previousFeatureTime = Time.time;
         }
 
         for(int i = 0; i < currentGlitches; i++)
