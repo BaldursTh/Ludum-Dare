@@ -24,7 +24,7 @@ namespace Menu
             while (!loadScene.isDone)
             {
                 float progress = Mathf.Clamp01(loadScene.progress / 0.9f);
-                Debug.Log(progress);
+                
                 bar.value = progress;
                 yield return null;
             }

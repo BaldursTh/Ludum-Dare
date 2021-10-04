@@ -22,6 +22,7 @@ namespace Enemies
                 rb.AddForce(transform.right * speed);
                 rb.constraints = RigidbodyConstraints2D.None;
             }
+           
 
             player = GameObject.FindGameObjectWithTag("Player");
 
@@ -35,11 +36,24 @@ namespace Enemies
         {
             if (home)
             {
+                
                 Vector2 direction =( transform.position - player.transform.position).normalized;
                 rb.velocity = -direction * speed;
+
+                float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+                transform.localEulerAngles = new Vector3(0, 0, angle);
             }
             else if (!useGravity)
+            {
                 rb.velocity = transform.right * speed;
+               
+            }
+            else
+            {
+                float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+                transform.localEulerAngles = new Vector3(0, 0, angle);
+            }
+                
         }
         private void OnBecameVisible()
         {
@@ -58,7 +72,7 @@ namespace Enemies
         {
             yield return new WaitForSeconds(1f);
             var campos = Camera.main.transform.position;
-            Debug.LogWarning(Vector3.Distance(new Vector3(transform.position.x, transform.position.y), new Vector3(campos.x, campos.y)));
+            
             if (Vector3.Distance(new Vector3(transform.position.x, transform.position.y), new Vector3(campos.x, campos.y)) >= 10f) 
             Destroy(gameObject);    
         }

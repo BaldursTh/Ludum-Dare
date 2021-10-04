@@ -18,6 +18,9 @@ namespace Player
         public LayerMask ground;
         public GameObject dashCloud;
         public GameObject jumpCloud;
+        public AudioSource aud;
+        public GameObject bulSpawn;
+        public AudioSource aud2;
 
         #region Parameters
         public float moveSpeedCap => data.moveSpeedCap;
@@ -79,8 +82,9 @@ namespace Player
         bool canShoot = true;
         void Shoot()
         {
+            aud.Play();
             anim.SetTrigger("Shoot");
-            GameObject _bulletPrefab = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            GameObject _bulletPrefab = Instantiate(bulletPrefab, bulSpawn.transform.position, Quaternion.identity);
             _bulletPrefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(bulletSpeed * facingDirection * invertedGun, 0));
             _bulletPrefab.transform.localScale = new Vector3(0.5f * facingDirection, 0.5f, 1);
             Destroy(_bulletPrefab, 10);
@@ -132,7 +136,7 @@ namespace Player
 
         IEnumerator Dash()
         {
-            
+            aud2.Play();
             
             PlayerState currentState = state;
             state = PlayerState.Dashing;
@@ -187,7 +191,7 @@ namespace Player
             if (collision.gameObject.layer == 6 && collision.GetContact(0).point.y <= transform.position.y - 0.45f && collision.GetContact(1).point.y <= transform.position.y - 0.45f)
             {
                 currentPoint = collision.GetContact(0).point;
-                Debug.Log(collision.GetContact(0).point.x);
+                
                 state = PlayerState.Walking;
                 jumps = 2;
 
@@ -198,7 +202,8 @@ namespace Player
         {
             if (jumps == 1)
             {
-                GameObject h = Instantiate(dashCloud, transform.position + new Vector3(0.15f * -facingDirection, -1f, 0), Quaternion.Euler(new Vector3(0, 0, 90)));
+                aud2.Play();
+                GameObject h = Instantiate(dashCloud, transform.position + new Vector3(0.5f * -facingDirection, -1f, 0), Quaternion.Euler(new Vector3(0, 0, 90)));
             }
             jumps--;
             

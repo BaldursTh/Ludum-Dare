@@ -24,6 +24,7 @@ namespace Enemies
 
         private Vector3 spawnPos;
         public Transform spawnObj;
+        public AudioSource aud;
 
         // Start is called before the first frame update
         void Start()
@@ -38,7 +39,7 @@ namespace Enemies
         {
             while(baseBehave.health > 0)
             {
-                
+                if (baseBehave.ded) yield return null;
 
                yield return new WaitForSeconds(waitTime);
                 Vector3 target = player.position;
@@ -63,7 +64,7 @@ namespace Enemies
                 anim.SetTrigger("Shoot");
 
                 yield return new WaitForSeconds(shootWait);
-
+                aud.Play();
                 transform.localScale = new Vector3(baseBehave.facingDirection, transform.localScale.y);
                 spawnPos = transform.position;
             if(spawnObj != null)

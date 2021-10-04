@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
 
     public GameObject gameOverScreen;
+    public AudioSource aud;
 
     public float maxHealth => data.maxHealth;
     public float healthGain => data.healthGain;
@@ -105,6 +106,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject heart3;
     void LooseHealth()
     {
+        aud.Play();
         currentHealth -= 1;
         CheckHealth();
        // unstableFeatures.FakeError(1, 0, 0, 0, "", "", gameObject);

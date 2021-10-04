@@ -129,10 +129,7 @@ public class UnstableFeatures : MonoBehaviour
         playerMov.invertedControls *= -1;
     }
 
-    public void SwapWaterLava(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
-    {
-
-    }
+   
 
     public void SpawnExtraEnemies(int count, int _b, float bigThreshold, float _d, string _e, string _f, GameObject go)
     {
@@ -152,10 +149,7 @@ public class UnstableFeatures : MonoBehaviour
         }
     }
 
-    public void ObjectTeleportation(int maxSwaps, int _a, float _c, float _d, string item1, string item2, GameObject go)
-    {
-
-    }
+    
 
     public void GunShootBackwards(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {

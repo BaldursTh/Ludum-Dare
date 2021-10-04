@@ -17,19 +17,19 @@ namespace Enemies
         public float moveSpeed;
         public bool fall;
         public LayerMask ground;
-        //private Animator anim;
+        private Animator anim;
         [SerializeField] private Collider2D[] disableOnDeath;
-        //private float deathTick = 1.5f;
+        
         public int facingDirection;
         public GameObject healthGain;
-        //public ParticleSystem explode;
-        //public AudioSource boom;
+        public AudioSource aud2;
+        
         // Start is called before the first frame update
         void Start()
         {
             facingDirection = 1;
             rb = GetComponent<Rigidbody2D>();
-            //anim = GetComponent<Animator>();
+            anim = GetComponent<Animator>();
             //spr = GetComponentInChildren<SpriteRenderer>();
             //explode = GameObject.Find("Smoke").GetComponent<ParticleSystem>();
             //boom = GameObject.Find("Boom").GetComponent<AudioSource>();
@@ -49,16 +49,29 @@ namespace Enemies
                 {
                     i.enabled = false;
                 }
-                GetComponent<SpriteRenderer>().enabled = false;
-                Instantiate(healthGain, transform.position, Quaternion.identity);
+                
+                
                 UnstabilityManager.instance.AddUnstability(deathUnstability);
-                //anim.SetBool("Dead", true);
+                anim.SetTrigger("Ded");
                 //deathTick -= Time.deltaTime;
                 moveSpeed = 0;
                 //if (deathTick <= 0)
-                Destroy(gameObject);
+                StartCoroutine("Ded");
+                
             }
 
+        }
+        public bool ded;
+        IEnumerator Ded()
+        {
+            ded = true;
+            aud2.Play();
+            GetComponent<Rigidbody2D>().isKinematic = true;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<Collider2D>().enabled = false;
+            yield return new WaitForSeconds(0.25f);
+            Instantiate(healthGain, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
         private void OnDrawGizmos()
         {
@@ -67,6 +80,7 @@ namespace Enemies
         // Update is called once per frame
         void FixedUpdate()
         {
+
             bool grounded = Physics2D.OverlapCircle(groundCheck.position, 0.05f, ground);
             if (Physics2D.OverlapCircle(wallCheck.position, 0.05f, ground) || (!Physics2D.OverlapCircle(floorCheck.position, 0.05f, ground) && !fall))
             {
