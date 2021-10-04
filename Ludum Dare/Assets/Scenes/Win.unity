@@ -176,6 +176,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 779149593}
     m_Modifications:
+    - target: {fileID: 301777824, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1942046187, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -316,6 +320,7 @@ PrefabInstance:
     - {fileID: 1942046189, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
     - {fileID: 1942046188, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
     - {fileID: 1942046187, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
+    - {fileID: 301777824, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 18f6181cac44f704bab2bfdcd49b7040, type: 3}
 --- !u!95 &550924369 stripped
 Animator:

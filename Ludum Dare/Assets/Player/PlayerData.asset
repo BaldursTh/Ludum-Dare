@@ -24,4 +24,4 @@ MonoBehaviour:
   maxHealth: 3
   healthGain: 34
   invincibilityDuration: 1
-  shootUnstability: 1
+  shootUnstability: 0.5
