@@ -95,7 +95,7 @@ public class UnstableFeatures : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            PlayerScale(0, 0, 0, 0, "", "", gameObject);
+            GravitySwap(0, 0, 0, 0, "", "", gameObject);
             UnstabilityManager.instance.AddUnstability(10);
         }
     }

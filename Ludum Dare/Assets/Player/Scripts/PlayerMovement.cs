@@ -43,7 +43,7 @@ namespace Player
             jumps = 2;
             if (GameManager.instance != null)
             {
-                
+                if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "GameFinal")
                 transform.position = GameManager.instance.checkpoint;
                 Debug.Log("Yes;");
             }
@@ -189,20 +189,30 @@ namespace Player
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer == 6 && collision.GetContact(0).point.y <= transform.position.y - 0.45f && collision.GetContact(1).point.y <= transform.position.y - 0.45f)
+            if (Mathf.Sign(transform.localScale.y) > 0.2f)
             {
-                currentPoint = collision.GetContact(0).point;
-                
-                state = PlayerState.Walking;
-                
-                jumps = 2;
+                if (collision.gameObject.layer == 6 && collision.GetContact(0).point.y <= transform.position.y - 0.45f * transform.localScale.y && collision.GetContact(1).point.y <= transform.position.y - 0.45f * transform.localScale.y)
+                {
+                    currentPoint = collision.GetContact(0).point;
+                    state = PlayerState.Walking;
+                    jumps = 2;
 
+                }
+            }
+            else
+            {
+                if (collision.gameObject.layer == 6 && collision.GetContact(0).point.y >= transform.position.y - 0.45f * transform.localScale.y && collision.GetContact(1).point.y >= transform.position.y - 0.45f * transform.localScale.y)
+                {
+                    currentPoint = collision.GetContact(0).point;
+                    state = PlayerState.Walking;
+                    jumps = 2;
+
+                }
             }
         }
         public int jumps;
         void Jump()
         {
-            
             if (jumps == 1)
             {
                 aud2.Play();

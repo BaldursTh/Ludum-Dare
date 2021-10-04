@@ -15,9 +15,10 @@ public class GameManager : MonoBehaviour
     public Vector3 checkpoint = new Vector3();
     public Vector3 start;
 
+    private string scene;
+
     private void Awake()
     {
-        QualitySettings.vSyncCount = 0;  // VSync must be disabled
         Application.targetFrameRate = 60;
         if (instance == null)
         {
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
             instance.GetComponent<UnstableFeatures>().Reload();
             instance.GetComponent<UnstabilityManager>().Reload();
             instance.pause = GameObject.FindGameObjectWithTag("Pause");
-        instance.state = GameState.Play;
+            instance.state = GameState.Play;
         }
         pause.SetActive(false);
         state = GameState.Play;
