@@ -64,7 +64,7 @@ public class UnstableFeatures : MonoBehaviour
         features.Add(HomingBullets);
         features.Add(ScaleEnemies);
         features.Add(EnemyRandomize);
-        features.Add(PlayerScale);
+        //features.Add(PlayerScale);
         features.Add(RandomizeBrightness);
         features.Add(Cracks);
         features.Add(ScreenRotate);
@@ -113,6 +113,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void GravitySwap(int x, int y, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Swap Gravity");
         foreach(Transform rb in enemyHandler.transform)
         {
             rb.GetComponent<Rigidbody2D>().gravityScale *= -1;
@@ -126,6 +127,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void InvertedControls(int x, int _a, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Invert Controls");
         playerMov.invertedControls *= -1;
     }
 
@@ -133,6 +135,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void SpawnExtraEnemies(int count, int _b, float bigThreshold, float _d, string _e, string _f, GameObject go)
     {
+        print("Enemy Spawn");
         count = 15;
         bigThreshold = 0.7f;
         for (int i = 0; i < count; i++)
@@ -153,30 +156,35 @@ public class UnstableFeatures : MonoBehaviour
 
     public void GunShootBackwards(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Gun invert");
         playerMov.invertedGun *= -1;
     }
 
     public void ScreenFlip(int x, int y, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Screen Flip");
         cam.projectionMatrix *= Matrix4x4.Scale(new Vector3(1, -1, 1));
     }
 
     public void BlackVoids(int count, int _a, float _c, float _d, string _e, string _f, GameObject go)
     {
-        GameObject[] voids = GameObject.FindGameObjectsWithTag("Void");
-        foreach(GameObject voi in voids)
+        print("Void");
+        Transform voids = GameObject.FindGameObjectWithTag("Void").transform;
+        foreach(Transform voi in voids)
         {
-            voi.SetActive(true);
+            voi.gameObject.SetActive(true);
         }
     }
 
     public void GlitchEffect(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Glitch");
         gli.intensity = Mathf.Clamp(gli.intensity + 0.05f, 0, 1);
     }
 
     public void FakeError(int count, int _b, float _c, float _d, string _e, string message, GameObject go)
     {
+        print("Error");
         StartCoroutine(SpawnErrors(count));
     }
 
@@ -190,6 +198,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void HomingBullets(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Homing");
         foreach (Transform i in enemyHandler.transform)
         {
             if (i.GetComponent<Enemies.ShootEnemy>() != null)
@@ -201,6 +210,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void ScaleEnemies(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
     {
+        print("Enemy Scale");
         scale = 0.5f;
         foreach (Transform i in enemyHandler.transform)
         {
@@ -211,6 +221,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void EnemyRandomize(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Enemy Swap");
         List<Vector3> savedPos = new List<Vector3>();
         foreach (Transform i in enemyHandler.transform)
         {
@@ -224,15 +235,18 @@ public class UnstableFeatures : MonoBehaviour
         }
     }
 
-    public void PlayerScale(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
+    /*public void PlayerScale(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
     {
+        print("Player Scale");
         scale = 0.5f;
         transform.localScale += new Vector3(Range(-0.5f, 0.5f) * Mathf.Sign(transform.localScale.x), Range(-0.5f, 0.5f), 1);
         transform.localScale = new Vector3(Mathf.Clamp(Mathf.Abs(transform.localScale.x), 0.2f, 5f), Mathf.Clamp(transform.localScale.y, 0.2f, 5f), 1);
-    }
+    }*/
 
     public void RandomizeBrightness(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Brightness");
+
         float bright = Range(0f, 1f);
         bright -= 0.5f;
         if(bright >= 0)
@@ -248,11 +262,13 @@ public class UnstableFeatures : MonoBehaviour
 
     public void Cracks(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Cracks");
         Instantiate(cracks, new Vector3(Range(-8.5f, 8.5f), Range(-2, 6.5f)), Quaternion.identity, crack.transform);
     }
 
     public void ScreenRotate(int direction, int _a, float _c, float _d, string _e, string _f, GameObject go)
     {
+        print("Rotate");
         vcam.transform.Rotate(0, 0, 90f/* * direction < 0 ? -1 : 1*/);
     }
 
