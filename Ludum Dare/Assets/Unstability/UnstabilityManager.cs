@@ -19,6 +19,8 @@ public class UnstabilityManager : MonoBehaviour
 
     public int currentGlitches;
 
+    private string scene;
+
     void Start()
     {
 
@@ -39,6 +41,8 @@ public class UnstabilityManager : MonoBehaviour
         currentUnstability = 0;
         previousFeatureTime = Time.time;
         anim = hourglass.GetComponent<Animator>();
+
+        scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
     }
 
     public void Reload()
@@ -47,6 +51,14 @@ public class UnstabilityManager : MonoBehaviour
         slider = GameObject.FindGameObjectWithTag("USlider").GetComponent<Slider>();
         features = GetComponent<UnstableFeatures>();
         anim = hourglass.GetComponent<Animator>();
+
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != name)
+        {
+            scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            currentGlitches = 0;
+            currentUnstability = 0;
+            featureInterval = 30;
+        }
 
         for(int i = 0; i < currentGlitches; i++)
         {
