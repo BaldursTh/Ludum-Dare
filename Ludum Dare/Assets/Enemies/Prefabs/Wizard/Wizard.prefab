@@ -191,7 +191,7 @@ MonoBehaviour:
   wallCheck: {fileID: 4432706323690492751}
   floorCheck: {fileID: 4432706322662056374}
   groundCheck: {fileID: 5927373828378497487}
-  moveSpeed: 2.5
+  moveSpeed: 0
   fall: 0
   ground:
     serializedVersion: 2
