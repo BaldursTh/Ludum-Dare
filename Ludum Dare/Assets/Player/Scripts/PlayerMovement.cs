@@ -88,7 +88,7 @@ namespace Player
             GameObject _bulletPrefab = Instantiate(bulletPrefab, bulSpawn.transform.position, Quaternion.identity);
             _bulletPrefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(bulletSpeed * facingDirection * invertedGun, 0));
             _bulletPrefab.transform.localScale = new Vector3(0.5f * facingDirection, 0.5f, 1);
-            Destroy(_bulletPrefab, 10);
+            
             UnstabilityManager.instance.AddUnstability(shootUnstability);
             StartCoroutine(ShootCooldown());
         }

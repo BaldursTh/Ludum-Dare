@@ -6,7 +6,7 @@ public class PlayerBullet : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("HealthPickup"))
+        if (!collision.CompareTag("HealthPickup") && !collision.CompareTag("Player"))
         {
             Destroy(gameObject);
         }
