@@ -22,6 +22,6 @@ MonoBehaviour:
   shootCooldown: 0.5
   bulletSpeed: 1000
   maxHealth: 3
-  healthGain: 50
+  healthGain: 25
   invincibilityDuration: 1
   shootUnstability: 1
