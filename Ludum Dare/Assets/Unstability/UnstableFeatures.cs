@@ -235,13 +235,13 @@ public class UnstableFeatures : MonoBehaviour
         }
     }
 
-    /*public void PlayerScale(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
+    public void PlayerScale(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
     {
         print("Player Scale");
         scale = 0.5f;
         transform.localScale += new Vector3(Range(-0.5f, 0.5f) * Mathf.Sign(transform.localScale.x), Range(-0.5f, 0.5f), 1);
         transform.localScale = new Vector3(Mathf.Clamp(Mathf.Abs(transform.localScale.x), 0.2f, 5f), Mathf.Clamp(transform.localScale.y, 0.2f, 5f), 1);
-    }*/
+    }
 
     public void RandomizeBrightness(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)
     {
