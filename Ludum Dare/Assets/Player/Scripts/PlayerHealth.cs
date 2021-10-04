@@ -28,6 +28,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         currenthealthGain = 0;
         greenSlider.value = 0;
+        Physics2D.IgnoreLayerCollision(0, 7, false); 
+        
     }
 
     
@@ -42,7 +44,9 @@ public class PlayerHealth : MonoBehaviour
         if (collision.collider.gameObject.layer == 7)
         {
             LooseHealth();
-           StartCoroutine(Invincibility());
+            StopCoroutine("Invincibility");
+            StartCoroutine("Invincibility");
+            GetComponent<Collider2D>().enabled = true;
         }
        
     }
@@ -67,7 +71,8 @@ public class PlayerHealth : MonoBehaviour
         if (collision.gameObject.layer == 7)
         {
             LooseHealth();
-            StartCoroutine(Invincibility());
+            StopCoroutine("Invincibility");
+            StartCoroutine("Invincibility");
         }
         if (collision.CompareTag("Void"))
         {
@@ -126,6 +131,7 @@ public class PlayerHealth : MonoBehaviour
     }
     void CheckHealth()
     {
+        
         if (currentHealth == 3)
          {
              heart3.GetComponent<Image>().enabled = true;

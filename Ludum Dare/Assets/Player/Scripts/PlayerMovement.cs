@@ -45,7 +45,7 @@ namespace Player
             {
                 if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "GameFinal")
                 transform.position = GameManager.instance.checkpoint;
-                Debug.Log("Yes;");
+               
             }
         }
         public enum PlayerState
