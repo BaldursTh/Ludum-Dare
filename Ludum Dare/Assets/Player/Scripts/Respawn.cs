@@ -34,12 +34,16 @@ namespace Level
         // Update is called once per frame
         private void Update()
         {
+            if(player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player").transform;
+            }
             if(player.transform.position.y <= transform.position.y)
             {
                 player.GetComponent<PlayerHealth>().LooseHealth();
                 player.GetComponent<PlayerHealth>().LooseHealth();
                 player.GetComponent<PlayerHealth>().LooseHealth();
-                gameObject.SetActive(false);
+                this.enabled = false;
             }
         }
     }
