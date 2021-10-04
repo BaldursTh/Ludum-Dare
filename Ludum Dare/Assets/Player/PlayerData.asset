@@ -19,9 +19,9 @@ MonoBehaviour:
   dashSpeed: 50
   dashCooldown: 0.2
   dashTime: 0.1
-  shootCooldown: 0.5
-  bulletSpeed: 1000
+  shootCooldown: 0.3
+  bulletSpeed: 1500
   maxHealth: 3
-  healthGain: 25
+  healthGain: 34
   invincibilityDuration: 1
   shootUnstability: 1
