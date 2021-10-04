@@ -29,9 +29,18 @@ namespace Level
 
         public void RespawnPlayer()
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(SceneIndex);
         }
         // Update is called once per frame
-        
+        private void Update()
+        {
+            if(player.transform.position.y <= transform.position.y)
+            {
+                player.GetComponent<PlayerHealth>().LooseHealth();
+                player.GetComponent<PlayerHealth>().LooseHealth();
+                player.GetComponent<PlayerHealth>().LooseHealth();
+                gameObject.SetActive(false);
+            }
+        }
     }
 }
