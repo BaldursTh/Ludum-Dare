@@ -112,7 +112,7 @@ namespace Player
             //{
             //    rb.velocity = new Vector2(0, rb.velocity.y);
             //}
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                
                 if (canDash)
@@ -122,12 +122,12 @@ namespace Player
                 }
             }
 
-            else if (Input.GetKeyDown(KeyCode.Z) && canShoot == true)
+            else if (Input.GetMouseButtonDown(1) && canShoot == true)
             {
                 Shoot();
             }
 
-            if (Input.GetKeyDown(KeyCode.C) && jumps >= 1)
+            if (Input.GetKeyDown(KeyCode.Space) && jumps >= 1)
             {
                 
                 Jump();
