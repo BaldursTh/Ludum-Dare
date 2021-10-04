@@ -102,6 +102,7 @@ namespace Enemies
             bul.speed = bulletSpeed;
             bul.home = home;
             bul.type = bulType;
+            bul.transform.localScale *= Mathf.Abs(transform.localScale.y);
         }
 
         void TripleTarget(float TargetAngle)
@@ -113,6 +114,7 @@ namespace Enemies
                 bul.speed = bulletSpeed;
                 bul.home = home;
                 bul.type = bulType;
+                bul.transform.localScale *= Mathf.Abs(transform.localScale.y);
             }
         }
 
@@ -125,6 +127,7 @@ namespace Enemies
                 bul.speed = bulletSpeed;
                 bul.home = home;
                 bul.type = bulType;
+                bul.transform.localScale *= Mathf.Abs(transform.localScale.y);
             }
         }
     }
