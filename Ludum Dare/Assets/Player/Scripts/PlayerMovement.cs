@@ -184,7 +184,7 @@ namespace Player
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer == 6 && collision.GetContact(0).point.y <= transform.position.y - 0.45f)
+            if (collision.gameObject.layer == 6 && collision.GetContact(0).point.y <= transform.position.y - 0.45f && collision.GetContact(1).point.y <= transform.position.y - 0.45f)
             {
                 currentPoint = collision.GetContact(0).point;
                 Debug.Log(collision.GetContact(0).point.x);
