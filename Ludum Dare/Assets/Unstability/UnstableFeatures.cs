@@ -61,7 +61,7 @@ public class UnstableFeatures : MonoBehaviour
         features.Add(BlackVoids);
         features.Add(GlitchEffect);
         features.Add(FakeError);
-        features.Add(HomingBullets);
+        //features.Add(HomingBullets);
         features.Add(ScaleEnemies);
         features.Add(EnemyRandomize);
         features.Add(PlayerScale);
