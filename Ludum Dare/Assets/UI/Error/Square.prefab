@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tf: {fileID: 2068455951676504398}
-  col: {fileID: 8431427414245524000}
+  col: {fileID: 5562648361517385903}
   audioSource: {fileID: 5599939677990370840}
 --- !u!61 &8431427414245524000
 BoxCollider2D:

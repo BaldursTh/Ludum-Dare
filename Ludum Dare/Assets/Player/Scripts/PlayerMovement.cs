@@ -67,11 +67,11 @@ namespace Player
             
         }
         public Vector2 point;
-        public Vector2 boxDimensions;
+        public Vector2 currentPoint;
         private void OnDrawGizmos()
         {
             
-            Gizmos.DrawWireCube(point + new Vector2(transform.position.x, transform.position.y), boxDimensions);
+            Gizmos.DrawSphere(currentPoint, 0.5f);
         }
         void CheckGround()
         {
@@ -82,6 +82,7 @@ namespace Player
             anim.SetTrigger("Shoot");
             GameObject _bulletPrefab = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
             _bulletPrefab.GetComponent<Rigidbody2D>().AddForce(new Vector2(bulletSpeed * facingDirection * invertedGun, 0));
+            _bulletPrefab.transform.localScale = new Vector3(0.5f * facingDirection, 0.5f, 1);
             Destroy(_bulletPrefab, 10);
             UnstabilityManager.instance.AddUnstability(shootUnstability);
             StartCoroutine(ShootCooldown());
@@ -183,9 +184,10 @@ namespace Player
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer == 6)
+            if (collision.gameObject.layer == 6 && collision.GetContact(0).point.y <= transform.position.y - 0.45f)
             {
-                
+                currentPoint = collision.GetContact(0).point;
+                Debug.Log(collision.GetContact(0).point.x);
                 state = PlayerState.Walking;
                 jumps = 2;
 

@@ -15,5 +15,10 @@ public class DragDialog : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
         transform.position = mousePos2D;
+        col.enabled = false;
+    }
+    private void OnMouseUp()
+    {
+        col.enabled = true;
     }
 }

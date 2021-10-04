@@ -22,6 +22,9 @@ namespace Enemies
 
         public int bulType;
 
+        private Vector3 spawnPos;
+        public Transform spawnObj;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -62,7 +65,11 @@ namespace Enemies
                 yield return new WaitForSeconds(shootWait);
 
                 transform.localScale = new Vector3(baseBehave.facingDirection, transform.localScale.y);
-
+                spawnPos = transform.position;
+            if(spawnObj != null)
+            {
+                spawnPos = spawnObj.position;
+            }
                 switch (type)
                 {
                     case ShootType.SingleTarget:
@@ -89,7 +96,7 @@ namespace Enemies
 
         void SingleTarget(float TargetAngle)
         {
-            Bullet bul = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, TargetAngle))).GetComponent<Bullet>();
+            Bullet bul = Instantiate(bullet, spawnPos, Quaternion.Euler(new Vector3(0, 0, TargetAngle))).GetComponent<Bullet>();
             bul.useGravity = useGravity;
             bul.speed = bulletSpeed;
             bul.home = home;
@@ -100,7 +107,7 @@ namespace Enemies
         {
             for (int i = -1; i < 2; i++)
             {
-                Bullet bul = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, TargetAngle + 30 * i))).GetComponent<Bullet>();
+                Bullet bul = Instantiate(bullet, spawnPos, Quaternion.Euler(new Vector3(0, 0, TargetAngle + 30 * i))).GetComponent<Bullet>();
                 bul.useGravity = useGravity;
                 bul.speed = bulletSpeed;
                 bul.home = home;
@@ -112,7 +119,7 @@ namespace Enemies
         {
             for(int i = 0; i < 8; i++)
             {
-                Bullet bul = Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, 45 * i))).GetComponent<Bullet>();
+                Bullet bul = Instantiate(bullet, spawnPos, Quaternion.Euler(new Vector3(0, 0, 45 * i))).GetComponent<Bullet>();
                 bul.useGravity = useGravity;
                 bul.speed = bulletSpeed;
                 bul.home = home;

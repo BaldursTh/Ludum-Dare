@@ -207,6 +207,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void ScaleEnemies(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
     {
+        scale = 0.5f;
         foreach (Transform i in enemyHandler.transform)
         {
             i.localScale += new Vector3(Range(-scale, scale) * Mathf.Sign(i.localScale.x), Range(-scale, scale), 0);
@@ -231,6 +232,7 @@ public class UnstableFeatures : MonoBehaviour
 
     public void PlayerScale(int _a, int _b, float scale, float _c, string _e, string _f, GameObject go)
     {
+        scale = 0.5f;
         transform.localScale += new Vector3(Range(-0.5f, 0.5f) * Mathf.Sign(transform.localScale.x), Range(-0.5f, 0.5f), 1);
         transform.localScale = new Vector3(Mathf.Clamp(Mathf.Abs(transform.localScale.x), 0.2f, 5f), Mathf.Clamp(transform.localScale.y, 0.2f, 5f), 1);
     }

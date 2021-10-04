@@ -96,6 +96,7 @@ Transform:
   - {fileID: 298901343146389252}
   - {fileID: 298901344267656701}
   - {fileID: 5313337107870787642}
+  - {fileID: 1155968916632111798}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -216,6 +217,8 @@ MonoBehaviour:
   home: 0
   anim: {fileID: 2759619876109331336}
   shootWait: 0.45
+  bulType: 0
+  spawnObj: {fileID: 1155968916632111798}
 --- !u!60 &385059389338383595
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -266,6 +269,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &2802964590379626111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1155968916632111798}
+  m_Layer: 7
+  m_Name: SpawnObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1155968916632111798
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2802964590379626111}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.5, y: -0.45, z: 0}
+  m_LocalScale: {x: 11, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 298901344283654824}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4321464187994682326
 GameObject:
   m_ObjectHideFlags: 0
