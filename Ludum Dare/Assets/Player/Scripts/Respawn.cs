@@ -32,12 +32,6 @@ namespace Level
             SceneManager.LoadScene(2);
         }
         // Update is called once per frame
-        void Update()
-        {
-            if (player.position.y <= transform.position.y)
-            {
-                SceneManager.LoadScene(SceneIndex);
-            }
-        }
+        
     }
 }

@@ -43,6 +43,7 @@ namespace Player
             jumps = 2;
             if (GameManager.instance != null)
             {
+                
                 transform.position = GameManager.instance.checkpoint;
                 Debug.Log("Yes;");
             }
@@ -193,6 +194,7 @@ namespace Player
                 currentPoint = collision.GetContact(0).point;
                 
                 state = PlayerState.Walking;
+                
                 jumps = 2;
 
             }
@@ -200,6 +202,7 @@ namespace Player
         public int jumps;
         void Jump()
         {
+            
             if (jumps == 1)
             {
                 aud2.Play();
