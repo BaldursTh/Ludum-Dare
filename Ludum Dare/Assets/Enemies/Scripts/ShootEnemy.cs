@@ -65,7 +65,7 @@ namespace Enemies
 
                 yield return new WaitForSeconds(shootWait);
                 aud.Play();
-                transform.localScale = new Vector3(baseBehave.facingDirection, transform.localScale.y);
+                transform.localScale = new Vector3(baseBehave.facingDirection * Mathf.Abs(transform.localScale.x), transform.localScale.y);
                 spawnPos = transform.position;
             if(spawnObj != null)
             {
@@ -90,7 +90,7 @@ namespace Enemies
                 yield return new WaitForSeconds(0.3f);
 
                 baseBehave.moveSpeed = cacheSpeed;
-                transform.localScale = new Vector3(baseBehave.facingDirection, transform.localScale.y);
+                transform.localScale = new Vector3(baseBehave.facingDirection * Mathf.Abs(transform.localScale.x), transform.localScale.y);
 
             }
         }
