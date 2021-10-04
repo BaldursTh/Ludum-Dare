@@ -64,7 +64,7 @@ public class UnstableFeatures : MonoBehaviour
         features.Add(HomingBullets);
         features.Add(ScaleEnemies);
         features.Add(EnemyRandomize);
-        //features.Add(PlayerScale);
+        features.Add(PlayerScale);
         features.Add(RandomizeBrightness);
         features.Add(Cracks);
         features.Add(ScreenRotate);
@@ -95,7 +95,7 @@ public class UnstableFeatures : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            GravitySwap(0, 0, 0, 0, "", "", gameObject);
+            PlayerScale(0, 0, 0, 0, "", "", gameObject);
             UnstabilityManager.instance.AddUnstability(10);
         }
     }
@@ -239,8 +239,8 @@ public class UnstableFeatures : MonoBehaviour
     {
         print("Player Scale");
         scale = 0.5f;
-        transform.localScale += new Vector3(Range(-0.5f, 0.5f) * Mathf.Sign(transform.localScale.x), Range(-0.5f, 0.5f), 1);
-        transform.localScale = new Vector3(Mathf.Clamp(Mathf.Abs(transform.localScale.x), 0.2f, 5f), Mathf.Clamp(transform.localScale.y, 0.2f, 5f), 1);
+        player.transform.localScale += new Vector3(Range(-0.5f, 0.25f) * Mathf.Sign(player.transform.localScale.x), Range(-0.5f, 0.25f), 1);
+        player.transform.localScale = new Vector3(Mathf.Clamp(Mathf.Abs(player.transform.localScale.x), 0.2f, 1.5f), Mathf.Clamp(player.transform.localScale.y, 0.2f, 1.5f), 1);
     }
 
     public void RandomizeBrightness(int _a, int _b, float _c, float _d, string _e, string _f, GameObject go)

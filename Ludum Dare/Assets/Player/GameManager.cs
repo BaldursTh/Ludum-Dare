@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public enum GameState
     {
-        Play, Pause, Dead
+        Play, Pause, Dead, Destroy
     }
     public GameState state;
     public GameObject pause;
@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
             0 => GameState.Play,
             1 => GameState.Pause,
             2 => GameState.Dead,
+            3 => GameState.Destroy,
             _ => GameState.Play,
         };
         CheckState();
@@ -77,6 +78,10 @@ public class GameManager : MonoBehaviour
             case GameState.Pause:
                 pause.SetActive(true);
                 Time.timeScale = 0;
+                break;
+            case GameState.Destroy:
+                Time.timeScale = 1;
+                Destroy(gameObject);
                 break;
         }
     }
